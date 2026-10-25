@@ -68,6 +68,40 @@
     margin-top: 4px;
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
   }
+  ul.reports .h5ad {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: #f6f8fa;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--fg);
+  }
+  ul.reports .h5ad .h5ad-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  ul.reports .h5ad .h5ad-row {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin: 2px 0;
+    word-break: break-all;
+  }
+  ul.reports .h5ad .h5ad-row strong {
+    color: var(--fg);
+    font-weight: 600;
+  }
+  ul.reports .h5ad .pending {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 8px;
+    background: #fff3cd;
+    color: #664d03;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: inherit;
+  }
   footer {
     margin-top: 48px;
     padding-top: 16px;
@@ -88,6 +122,22 @@
       <a href="/gbm-atlas/top-1000">GBM snATAC enhancer atlas — top-1000 per cell type (v4)</a>
       <div class="desc">48 patients × 8 cohorts × 1.52 M nuclei. 14 cell-type tabs with row-expansion panels showing per-patient fragments-per-cell and per-cohort detection. Candidate enhancer regions for AAV-driven selective expression.</div>
       <div class="meta">v4 · 2026-10-17</div>
+      <div class="h5ad">
+        <div class="h5ad-title">Underlying h5ad (per-cell integrated matrices)</div>
+        <div class="h5ad-row"><strong>gbm_atlas_v1.1_cxg.h5ad</strong> — 112 GB · CELLxGENE-formatted (cell_type ontology, obs/var standardized, raw+normalized layers)</div>
+        <div class="h5ad-row"><strong>gbm_atlas_v1.1_integrated.h5ad</strong> — 96 GB · raw integrated (per-cell × union peak matrix, pre-CXG schema)</div>
+        <div class="pending">Direct download link pending AWS Open Data Sponsorship review (<a href="https://github.com/awslabs/open-data-registry/pull/3433" target="_blank" rel="noopener noreferrer" style="color:#664d03;text-decoration:underline;">PR #3433</a>). Will update here once approved. For early access, email mcginnislab.</div>
+      </div>
+    </li>
+    <li>
+      <a href="/normal-brain-atlas/top-1000">Normal brain snATAC enhancer atlas — top-1000 per cell type (v3)</a>
+      <div class="desc">~160 donors × 23 cohorts × 41 M barcodes (6 M post nnz≥1k QC) × 990 K union peaks. 16 major cell-type tabs with per-cohort replication and surgical/postmortem split, Design B narrow sub-peaks (median ~518 bp) rendered inline for AAV cloning, direct UCSC Genome Browser deep links.</div>
+      <div class="meta">v3 · 2026-10-24</div>
+      <div class="h5ad">
+        <div class="h5ad-title">Underlying h5ad (per-cell integrated matrix)</div>
+        <div class="h5ad-row"><strong>nb_atlas_v1.1_integrated.h5ad</strong> — 342 GB · raw integrated (per-cell × union peak matrix, 16 major_class labels, 23-cohort provenance in obs)</div>
+        <div class="pending">Direct download link pending AWS Open Data Sponsorship review (<a href="https://github.com/awslabs/open-data-registry/pull/3433" target="_blank" rel="noopener noreferrer" style="color:#664d03;text-decoration:underline;">PR #3433</a>). Will update here once approved. For early access, email mcginnislab.</div>
+      </div>
     </li>
   </ul>
 
