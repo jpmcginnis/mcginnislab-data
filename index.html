@@ -64,6 +64,19 @@
     margin-bottom: 8px;
     line-height: 1.5;
   }
+  ul.reports .under-construction {
+    display: inline-block;
+    padding: 2px 8px;
+    margin-right: 8px;
+    background: #fff3cd;
+    color: #664d03;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    vertical-align: middle;
+  }
   ul.reports .desc {
     color: var(--muted);
     font-size: 13px;
@@ -138,7 +151,7 @@
       </div>
     </li>
     <li>
-      <a href="/normal-brain-atlas/top-1000">Normal brain snATAC enhancer atlas — top-1000 per cell type (v3)</a>
+      <a href="/normal-brain-atlas/top-1000"><span class="under-construction">Under construction</span>Normal brain snATAC enhancer atlas — top-1000 per cell type (v3)</a>
       <div class="lay">We combined all publicly available data on the locations of the DNA switches that are active in each cell type inside the normal human brain. This identifies sequences that may be helpful in selectively targeting certain cells for various kinds of brain problems.</div>
       <div class="desc">Up to 830 donors × 25 cohorts in abundant cell types (OPC 830 / Oligo 745 / Inhibitory 704 / Astrocyte 704 / Microglia 661 / Excitatory 528 / Endothelial 362); rare types (Meninges, T_cell, Serotonergic, Dopaminergic) have single-digit to ~20 donors. 41 M barcodes (6 M post nnz≥1k QC) × 990 K union peaks. 16 major cell-type tabs with per-cohort replication and surgical/postmortem split, Design B narrow sub-peaks (median ~518 bp) rendered inline for AAV cloning, direct UCSC Genome Browser deep links.</div>
       <div class="meta">v3 · 2026-10-24</div>
