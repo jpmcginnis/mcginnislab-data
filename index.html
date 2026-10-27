@@ -84,9 +84,19 @@
   }
   ul.reports .meta {
     color: var(--muted);
-    font-size: 12px;
+    font-size: 10px;
     margin-top: 4px;
     font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  ul.reports .meta a {
+    color: var(--muted);
+    font-size: inherit;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--muted) 40%, transparent);
+  }
+  ul.reports .meta a:hover {
+    color: var(--text);
+    text-decoration-color: currentColor;
   }
   ul.reports .h5ad {
     margin-top: 10px;
