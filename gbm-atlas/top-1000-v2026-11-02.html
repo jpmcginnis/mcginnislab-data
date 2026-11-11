@@ -1,3 +1,4 @@
+<!-- 2026-11-11 correction: "≥100 cells" strings in this archive were corrected to "≥50 cells" to match the actual MIN_CELLS=50 floor the matrix was built with. The "100" claims in the original header/tooltips were from an incorrect docstring in the scoring script; no data changed. -->
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <title>GBM snATAC Atlas v4 — Enhancer Candidates</title>
@@ -154,11 +155,11 @@
           <th title="Distance band: '2-10kb' or '>10kb'. Use the Distance band dropdown to filter.">band</th>
           <th title="Specificity: log2 fold-change of pseudobulk mean CPM in the top cell type vs the second-highest cell type. Taxonomy: 10 primary cell types for primary tabs; 13 (pooled malignant excluded) for subtype tabs.">log2FC top vs next</th>
           <th title="Percentile rank of log2FC_top_vs_next across all distal peaks. 0 = lowest, 1 = highest specificity.">spec pct</th>
-          <th title="PLAIN strength (v4): mean over evaluable patients (≥100 cells of target type) of (fragments / cells × 500 / peak_width_bp). Average Tn5 fragments per cell at this peak, width-normalized to a 500 bp reference. No Poisson adjustment, no model assumption.">strength (frags/cell, wn)</th>
+          <th title="PLAIN strength (v4): mean over evaluable patients (≥50 cells of target type) of (fragments / cells × 500 / peak_width_bp). Average Tn5 fragments per cell at this peak, width-normalized to a 500 bp reference. No Poisson adjustment, no model assumption.">strength (frags/cell, wn)</th>
           <th title="Percentile rank of strength_frags_per_cell_wn across all distal peaks. 0 = lowest, 1 = highest.">strength pct</th>
           <th title="DEFAULT RANKING. (spec_pct + strength_pct) / 2. Equal-weighted sum of nonparametric percentile ranks of specificity and strength. 0-1, higher is better.">primary score</th>
           <th title="Count of cohorts (0-8) where cohort-level frags/cell (width-normalized) ≥ 0.05. Measures cross-cohort replication.">n cohorts</th>
-          <th title="Detected in N of M evaluable patients. Evaluable = ≥100 cells of target cell type. Detected = per-patient frags/cell (width-normalized) ≥ 0.01.">patient detection</th>
+          <th title="Detected in N of M evaluable patients. Evaluable = ≥50 cells of target cell type. Detected = per-patient frags/cell (width-normalized) ≥ 0.01.">patient detection</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -327,7 +328,7 @@ function renderTab(ct) {
       <td class="num">${r.strength_pct.toFixed(3)}</td>
       <td class="num primary-score-cell">${r.primary_score.toFixed(3)}</td>
       <td class="num">${r.n_cohorts}</td>
-      <td class="num" title="Detected in ${r.n_patients_detected} of ${r.n_patients_evaluable}; evaluable=≥100 cells; detected=per-patient frags/cell wn ≥ 0.01." data-order="${r.patient_detection_rate}">${fmtDetection(r)}</td>`;
+      <td class="num" title="Detected in ${r.n_patients_detected} of ${r.n_patients_evaluable}; evaluable=≥50 cells; detected=per-patient frags/cell wn ≥ 0.01." data-order="${r.patient_detection_rate}">${fmtDetection(r)}</td>`;
     tbody.appendChild(tr);
   });
   dt = $('#atlas-table').DataTable({
