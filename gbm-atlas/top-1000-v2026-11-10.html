@@ -191,7 +191,7 @@ const CT_LIST = ["astrocyte", "microglia", "oligodendrocyte", "OPC", "endothelia
 // Single atlas-wide CPM scale (99th percentile across all peak x CT). For AAV
 // scoring: absolute enhancer strength matters, not strength relative to each
 // CT's own ceiling.
-const ATLAS_CPM_SCALE = 40.65865716552719;
+const ATLAS_CPM_SCALE = 71.56932068560238;
 
 const AMP_REGIONS = [
   { chrom: 'chr7',  start: 54500000, end: 56000000, label: 'EGFR amp' },
@@ -297,7 +297,7 @@ function renderExpansion(peak_id, tab_ct) {
         <div class="ct-bars">${ctBars}</div>
       </div>
       <div>
-        <h4>Absolute strength — CPM at this peak, scaled to one atlas-wide ceiling (99.9th pct across all peak \u00d7 CT)</h4>
+        <h4>Absolute strength — CPM at this peak, scaled to one atlas-wide ceiling (99.999th pct across distal non-AMP peak \u00d7 CT)</h4>
         <div class="ct-bars">${ctBarsAbs}</div>
       </div>
     </div>
