@@ -113,10 +113,15 @@
     <option value="2-10kb">2–10 kb only</option>
     <option value=">10kb">&gt; 10 kb only</option>
   </select>
-  <span class="group-label" style="margin-left:12px;">Toggle columns:</span>
-  <label><input type="checkbox" class="col-toggle" data-col="1"> chrom</label>
-  <label><input type="checkbox" class="col-toggle" data-col="2"> start</label>
-  <label><input type="checkbox" class="col-toggle" data-col="3"> end</label>
+  <span class="group-label" style="margin-left:16px;">Patient detection:</span>
+  <select id="det-filter">
+    <option value="0">no filter</option>
+    <option value="0.5">≥ 50% of evaluable patients</option>
+    <option value="0.6">≥ 60%</option>
+    <option value="0.7">≥ 70%</option>
+    <option value="0.8">≥ 80%</option>
+    <option value="0.9">≥ 90%</option>
+  </select>
 </div>
 
 <div class="main">
@@ -153,9 +158,6 @@
       <thead>
         <tr>
           <th title="GRCh38 peak coordinates (chr:start-end). AMP badge = within ±1 Mb of a known GBM amplicon.">peak_id</th>
-          <th title="Chromosome, GRCh38. Hidden by default.">chrom</th>
-          <th title="Peak start coordinate (0-based). Hidden by default.">start</th>
-          <th title="Peak end coordinate (0-based). Hidden by default.">end</th>
           <th title="Peak width in bp (end − start).">width (bp)</th>
           <th title="HGNC symbol of nearest annotated TSS. CONTEXT ONLY — does NOT identify the regulatory target.">nearest gene</th>
           <th title="Signed distance from peak midpoint to the nearest TSS. Negative = upstream on gene's sense strand.">dist to TSS</th>
@@ -219,7 +221,7 @@ function fmtDetection(r) {
   return `${pct}% (${r.n_patients_detected}/${r.n_patients_evaluable})`;
 }
 
-let dt, currentCT = null, currentDistFilter = 'all';
+let dt, currentCT = null, currentDistFilter = 'all', currentDetFilter = 0;
 
 function renderExpansion(peak_id, tab_ct) {
   const data = EXPANSION[tab_ct] && EXPANSION[tab_ct][peak_id];
@@ -309,9 +311,10 @@ function renderExpansion(peak_id, tab_ct) {
 function renderTab(ct) {
   currentCT = ct;
   const rows = TAB_DATA[ct] || [];
-  const filtered = currentDistFilter === 'all'
-    ? rows
-    : rows.filter(r => r.distance_band === currentDistFilter);
+  const filtered = rows.filter(r =>
+    (currentDistFilter === 'all' || r.distance_band === currentDistFilter) &&
+    r.patient_detection_rate >= currentDetFilter
+  );
   if (dt) { dt.destroy(); $('#atlas-table tbody').empty(); }
   const tbody = document.getElementById('atlas-table').getElementsByTagName('tbody')[0];
   filtered.forEach(r => {
@@ -320,9 +323,6 @@ function renderTab(ct) {
     tr.setAttribute('data-peak', r.peak_id);
     tr.innerHTML = `
       <td class="peakid"><span class="expander" title="Click to expand">\u25b8</span> ${r.peak_id}${ampFlag}</td>
-      <td>${r.chrom}</td>
-      <td class="num">${r.start}</td>
-      <td class="num">${r.end}</td>
       <td class="num">${r.peak_width_bp}</td>
       <td>${r.nearest_gene}</td>
       <td class="num">${fmtDist(r.dist_to_tss_signed)}</td>
@@ -339,12 +339,11 @@ function renderTab(ct) {
   dt = $('#atlas-table').DataTable({
     paging: true, pageLength: 100,
     lengthMenu: [25, 50, 100, 250, 1000],
-    order: [[12, 'desc']],
+    order: [[9, 'desc']],
     dom: '<"top"lf>rt<"bottom"ip>',
     columnDefs: [
       { orderable: true, targets: '_all' },
-      { visible: false, targets: [1,2,3] },
-      { className: 'num', targets: [2,3,4,6,8,9,10,11,12,13,14] }
+      { className: 'num', targets: [1,3,5,6,7,8,9,10,11] }
     ]
   });
   $('#atlas-table tbody').off('click').on('click', 'tr', function(e) {
@@ -359,10 +358,6 @@ function renderTab(ct) {
       tr.find('.expander').text('\u25be');
     }
   });
-  $('.col-toggle').each(function() {
-    const idx = parseInt(this.dataset.col);
-    this.checked = dt.column(idx).visible();
-  });
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.tab-btn[data-ct="${ct}"]`).classList.add('active');
 }
@@ -370,12 +365,12 @@ function renderTab(ct) {
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => renderTab(btn.dataset.ct));
 });
-$(document).on('change', '.col-toggle', function() {
-  const col = dt.column(parseInt(this.dataset.col));
-  col.visible(this.checked);
-});
 document.getElementById('dist-filter').addEventListener('change', function() {
   currentDistFilter = this.value;
+  renderTab(currentCT);
+});
+document.getElementById('det-filter').addEventListener('change', function() {
+  currentDetFilter = parseFloat(this.value) || 0;
   renderTab(currentCT);
 });
 
