@@ -125,6 +125,21 @@
     <option value="0.8">≥ 80%</option>
     <option value="0.9">≥ 90%</option>
   </select>
+  <span class="group-label" style="margin-left:16px;">log2FC top vs next:</span>
+  <select id="log2fc-filter">
+    <option value="0">no filter</option>
+    <option value="0.5">&gt; 0.5</option>
+    <option value="1.0">&gt; 1.0</option>
+    <option value="1.5">&gt; 1.5</option>
+  </select>
+  <span class="group-label" style="margin-left:16px;">Strength (frag/cell, wn):</span>
+  <select id="strength-filter">
+    <option value="0">no filter</option>
+    <option value="0.1">&gt; 0.1</option>
+    <option value="0.2">&gt; 0.2</option>
+    <option value="0.3">&gt; 0.3</option>
+    <option value="0.5">&gt; 0.5</option>
+  </select>
 </div>
 
 <div class="main">
@@ -243,7 +258,7 @@ function fmtDetection(r) {
   return `${pct}% (${r.n_patients_detected}/${r.n_patients_evaluable})`;
 }
 
-let dt, currentCT = null, currentDistFilter = 'all', currentDetFilter = 0;
+let dt, currentCT = null, currentDistFilter = 'all', currentDetFilter = 0, currentLog2fcFilter = 0, currentStrengthFilter = 0;
 
 function renderExpansion(peak_id, tab_ct) {
   const data = EXPANSION[tab_ct] && EXPANSION[tab_ct][peak_id];
@@ -341,7 +356,9 @@ function renderTab(ct) {
   const rows = TAB_DATA[ct] || [];
   const filtered = rows.filter(r =>
     (currentDistFilter === 'all' || r.distance_band === currentDistFilter) &&
-    r.patient_detection_rate >= currentDetFilter
+    r.patient_detection_rate >= currentDetFilter &&
+    (currentLog2fcFilter === 0 || r.log2FC_top_vs_next > currentLog2fcFilter) &&
+    (currentStrengthFilter === 0 || r.strength_frags_per_cell_wn > currentStrengthFilter)
   );
   if (dt) { dt.destroy(); $('#atlas-table tbody').empty(); }
   const tbody = document.getElementById('atlas-table').getElementsByTagName('tbody')[0];
@@ -399,6 +416,14 @@ document.getElementById('dist-filter').addEventListener('change', function() {
 });
 document.getElementById('det-filter').addEventListener('change', function() {
   currentDetFilter = parseFloat(this.value) || 0;
+  renderTab(currentCT);
+});
+document.getElementById('log2fc-filter').addEventListener('change', function() {
+  currentLog2fcFilter = parseFloat(this.value) || 0;
+  renderTab(currentCT);
+});
+document.getElementById('strength-filter').addEventListener('change', function() {
+  currentStrengthFilter = parseFloat(this.value) || 0;
   renderTab(currentCT);
 });
 
