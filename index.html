@@ -155,10 +155,13 @@
       <div class="desc">67 patients × 10 cohorts × 1.65 M nuclei × 2.09 M union peaks (97 K novel from Terekhanova 2023). 14 cell-type tabs (10 primary + 4 malignant subtypes) with per-patient fragments-per-cell and per-cohort detection.</div>
       <div class="meta">v4 · 2026-11-10 &nbsp;·&nbsp; Per-sample metadata: <a href="/gbm-atlas/metadata.csv" download>metadata.csv</a> (<a href="/gbm-atlas/metadata-full.csv" download>all cols</a>)</div>
       <div class="h5ad">
-        <div class="h5ad-title">Underlying h5ad (per-cell integrated matrices)</div>
-        <div class="h5ad-row"><strong>gbm_atlas_v1.1_cxg.h5ad</strong> — 112 GB · CELLxGENE-formatted (cell_type ontology, obs/var standardized, raw+normalized layers)</div>
-        <div class="h5ad-row"><strong>gbm_atlas_v1.1_integrated.h5ad</strong> — 96 GB · raw integrated (per-cell × union peak matrix, pre-CXG schema)</div>
-        <div class="pending">Direct download link pending AWS Open Data Sponsorship review (<a href="https://github.com/awslabs/open-data-registry/pull/3433" target="_blank" rel="noopener noreferrer" style="color:#664d03;text-decoration:underline;">PR #3433</a>). Will update here once approved. For early access, email mcginnislab.</div>
+        <div class="h5ad-title">Full v1.2 deposit — AWS Registry of Open Data</div>
+        <div class="h5ad-row"><strong>gbm_atlas_v1.2_integrated.h5ad</strong> — 34.8 GB · per-cell integrated atlas (1,585,983 nuclei × 1,958,753 peaks, sparse CSR, obs/var/uns stamped with atlas provenance)</div>
+        <div class="h5ad-row"><strong>per_cohort/&lt;slug&gt;/&lt;slug&gt;_at_v5.h5ad</strong> × 10 — 94.5 GB total · per-cohort per-cell h5ads (Pai + Terekhanova on 2.09M-peak axis; eight v1.1 cohorts on 1.96M-peak v1.1 axis)</div>
+        <div class="h5ad-row">Plus pseudobulk matrix, peak reference, per-cell-type top-1000 tables, scoring scripts, METHODS/SCHEMA/CHANGELOG. 131 GB total, 101 objects.</div>
+        <div class="h5ad-row">Registry landing page: <a href="https://registry.opendata.aws/gbm-chromatin-accessibility-atlas-mcginnis/" style="word-break: break-all;">registry.opendata.aws/gbm-chromatin-accessibility-atlas-mcginnis</a></div>
+        <div class="h5ad-row">S3 (no-sign-request, us-east-1): <code>s3://mcginnislab-gbm-atlas/</code> &nbsp;·&nbsp; HTTPS: <a href="https://mcginnislab-gbm-atlas.s3.amazonaws.com/" style="word-break: break-all;">mcginnislab-gbm-atlas.s3.amazonaws.com</a></div>
+        <div class="h5ad-row">Raw Tn5 fragments are not re-distributed from this deposit; readers can pull from the original consortia — GEO <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE286415">GSE286415</a> (Pai 2025), <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE276177">GSE276177</a> (Sojka 2025), and the open-access GDC pan-cancer scATAC release (Terekhanova 2023, Sundaram 2024). Per-cohort status in <code>cohort_attribution.csv</code>.</div>
       </div>
     </li>
     <li>
@@ -193,7 +196,7 @@
   <h2>Code</h2>
   <ul class="reports">
     <li>
-      <a href="https://github.com/jpmcginnis/HumanAAVProject/tree/main/Glioblastoma%20snATACseq%20pipeline">GBM snATAC-seq pipeline</a>
+      <a href="https://github.com/jpmcginnis/HumanAAVProject/tree/main/glioblastoma-snATAC-seq-pipeline">GBM snATAC-seq pipeline</a>
       <div class="desc">End-to-end pipeline for the GBM enhancer atlas — FASTQ ingestion through union peak set, pseudobulk, differential accessibility, candidate scoring, and the v4 HTML atlas rendering.</div>
     </li>
     <li>
