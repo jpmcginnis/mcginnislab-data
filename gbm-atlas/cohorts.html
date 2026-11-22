@@ -1,0 +1,340 @@
+<!doctype html><html><head><meta charset="utf-8"><title>GBM atlas — cohorts, papers and sources</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;margin:16px;color:#222;background:#fff}
+h1{font-size:20px;margin-bottom:4px}
+.sub{color:#666;margin-bottom:12px;font-size:13px;max-width:1000px;line-height:1.5}
+.filters{background:#fff;padding:8px;border:1px solid #ddd;border-radius:6px;margin-bottom:12px;font-size:12px}
+.filters input[type=text]{padding:4px;border:1px solid #ccc;border-radius:3px;width:260px}
+.filters label{margin-right:12px}
+table{border-collapse:collapse;font-size:11px;width:100%}
+th{background:#345;color:#fff;padding:6px 8px;text-align:left;position:sticky;top:0;cursor:pointer}
+th.grp{background:#1f3b4d}
+td{padding:5px 8px;border-bottom:1px solid #eee;vertical-align:top}
+td.wide{max-width:340px;word-wrap:break-word}
+td.file{font-family:ui-monospace,SFMono-Regular,monospace;font-size:10px;color:#07a}
+tr:hover{background:#f0f4ff}
+a{color:#07a;text-decoration:none} a:hover{text-decoration:underline}
+.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.yes{color:#2a7} .no{color:#d44} .pend{color:#a80}
+.lib{color:#777;font-weight:500}
+.totals{margin-top:12px;font-size:13px;color:#333;padding:10px;background:#f4f8ff;border-radius:6px}
+.lib-cols, .lib-cols-cell{display:none}
+body.show-lib .lib-cols, body.show-lib .lib-cols-cell{display:table-cell}
+</style>
+<script>
+function toggleLib(){document.body.classList.toggle("show-lib")}
+function search(){
+  const q=document.getElementById("q").value.toLowerCase();
+  document.querySelectorAll("tbody tr").forEach(tr=>{
+    tr.style.display = tr.innerText.toLowerCase().includes(q) ? "" : "none";
+  });
+}
+</script>
+</head><body>
+<h1>GBM atlas — cohorts, papers and sources</h1>
+<div class="sub">
+Harmonized human IDH-wildtype glioblastoma snATAC-seq atlas (v2026-11-15). One row per cohort. Every URL to re-download the raw data, verify the citation, and confirm the per-patient inclusion decisions.<br>
+<b>Patients</b> = unique individuals (biological replicates), the primary replication unit in all atlas scoring. <b>YES</b> rows were pseudobulked into the atlas; <b>NO</b> rows were excluded for the reason stated.<br>
+<b>Libraries</b> = sequencing libraries. Hidden by default (toggle below). No GBM cohort in the atlas is genetically multiplexed, so 1 library = 1 patient for every row. Multi-sample patients (de Jong multi-region, Wang 2024 primary/recurrent, Pai Core/Margin, Terekhanova CPTAC multi-section) are collapsed to a single patient id in the per-cell-type pseudobulk.<br>
+<b>Donor-level metadata file</b> points to the row in <code>cohort_attribution.csv</code> where per-patient inclusion rationale lives.
+</div>
+<div class="filters">
+  <input id="q" type="text" placeholder="Search (cohort, author, tissue, PMID...)" oninput="search()">
+  <label><input type="checkbox" onchange="toggleLib()"> Show library counts</label>
+</div>
+<table>
+<thead><tr>
+<th>Cohort</th>
+<th>Author/year</th>
+<th>Paper</th>
+<th>Journal</th>
+<th>PubMed</th>
+<th>DOI</th>
+<th>Accession (landing)</th>
+<th>Download</th>
+<th>Tissue</th>
+<th>Modality</th>
+<th>Disease relevance</th>
+<th class="grp">Patients total</th>
+<th class="grp">Patients YES</th>
+<th class="grp">Patients NO</th>
+<th class="grp">Patients pending</th>
+<th class="grp lib-cols">Libraries total</th>
+<th class="grp lib-cols">Libraries YES</th>
+<th class="grp lib-cols">Libraries NO</th>
+<th>Cells (n)</th>
+<th>Tracks</th>
+<th>Exclusion reason</th>
+<th>Donor-level metadata file</th>
+<th>Notes</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><b>dejong_2026</b></td>
+<td>de Jong G et al. 2026</td>
+<td class="wide">A spatiotemporal cancer cell trajectory underlies glioblastoma heterogeneity</td>
+<td>Nature (online 2026 Nov 4)</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/42983086/" target="_blank">PMID 42983086</a></td>
+<td><a href="https://doi.org/10.1038/s41586-026-11234-8" target="_blank">10.1038/s41586-026-11234-8</a></td>
+<td><a href="https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-17183" target="_blank">E-MTAB-17183</a></td>
+<td><a href="https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-17183/files" target="_blank">ArrayExpress: E-MTAB-17183/files</a></td>
+<td>GBM tumor (multi-region)</td>
+<td>10x snATAC (multiome subset)</td>
+<td>Primary IDH-WT GBM</td>
+<td class="num">12</td>
+<td class="num yes">12</td>
+<td class="num no">0</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">12</td>
+<td class="num lib-cols-cell lib">12</td>
+<td class="num lib-cols-cell lib">0</td>
+<td class="num">1,041,869</td>
+<td>main</td>
+<td class="wide">AT9 excitatory-neuron CNV cluster (265 cells) excluded from neuron track at atlas build; patient remains in malignant / myeloid / glial pools.</td>
+<td class="file">cohort_attribution.csv row 2</td>
+<td class="wide">Bayraktar lab (Sanger). Author "Resident-TAMs" subtype (8,236 cells / 12 patients) reassigned to microglia pool by ontogeny; remaining TAM subtypes stayed in TAM. Previously misattributed as "greenwald_2024" in v2026-11-07 and earlier — corrected v2026-11-08b. Raw fragments not released; h5ad only.</td>
+</tr>
+<tr>
+<td><b>sundaram_2024</b></td>
+<td>Sundaram L et al. 2024</td>
+<td class="wide">Single-cell chromatin accessibility reveals malignant regulatory programs in primary human cancers</td>
+<td>Science 385(6713):eadk9217</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/39236169/" target="_blank">PMID 39236169</a></td>
+<td><a href="https://doi.org/10.1126/science.adk9217" target="_blank">10.1126/science.adk9217</a></td>
+<td><a href="https://portal.gdc.cancer.gov/files/a7765b5f-a606-4657-94ed-4c2a85bf3f39" target="_blank">GDC file a7765b5f-...</a></td>
+<td><a href="https://api.gdc.cancer.gov/data/a7765b5f-a606-4657-94ed-4c2a85bf3f39" target="_blank">GDC API: a7765b5f-a606-4657-94ed-4c2a85bf3f39</a></td>
+<td>GBM tumor (TCGA)</td>
+<td>10x snATAC</td>
+<td>Primary IDH-WT GBM (TCGA)</td>
+<td class="num">9</td>
+<td class="num yes">8</td>
+<td class="num no">1</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">9</td>
+<td class="num lib-cols-cell lib">8</td>
+<td class="num lib-cols-cell lib">1</td>
+<td class="num">157,685</td>
+<td>main</td>
+<td class="wide">X008 excluded — snapatac2 Rust panic on obs structure.</td>
+<td class="file">cohort_attribution.csv row 4</td>
+<td class="wide">GDC pan-cancer scATAC open-access blob (no dbGaP auth required). Earlier "Controlled (dbGaP phs001287)" label referred to parent TCGA PanCanAtlas registration, not this open subset. Previously miscited as "Sundaram et al. 2024 Cell Reports" — corrected v2026-11-07.</td>
+</tr>
+<tr>
+<td><b>sojka_2025</b></td>
+<td>Sojka C et al. 2025</td>
+<td class="wide">Mapping the developmental trajectory of human astrocytes reveals divergence in glioblastoma</td>
+<td>Nat Cell Biol 27(2):347-359</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/39779941/" target="_blank">PMID 39779941</a></td>
+<td><a href="https://doi.org/10.1038/s41556-024-01583-9" target="_blank">10.1038/s41556-024-01583-9</a></td>
+<td><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE276177" target="_blank">GSE276177</a></td>
+<td><a href="https://ftp.ncbi.nlm.nih.gov/geo/series/GSE276nnn/GSE276177/" target="_blank">GEO FTP: GSE276177</a></td>
+<td>GBM tumor (astrocyte-lineage focused)</td>
+<td>10x snATAC</td>
+<td>Primary IDH-WT GBM</td>
+<td class="num">3</td>
+<td class="num yes">3</td>
+<td class="num no">0</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">3</td>
+<td class="num lib-cols-cell lib">3</td>
+<td class="num lib-cols-cell lib">0</td>
+<td class="num">289,242</td>
+<td>main</td>
+<td class="wide"></td>
+<td class="file">cohort_attribution.csv row 3</td>
+<td class="wide">Goldman lab (via Sojka). Legacy slug "gse276177_khan_astro" was a misnomer — fixed in v5. Raw 10x fragments released on GEO; used for fragment-mode re-aggregation in v2026-11-05.</td>
+</tr>
+<tr>
+<td><b>lin_2026</b></td>
+<td>Lin J et al. 2026</td>
+<td class="wide">Spatial and single-cell characterization of human glioblastoma tumor microenvironment reveals malignant cellular communities</td>
+<td>Nat Neurosci 29(6):1342-1354</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/41992007/" target="_blank">PMID 41992007</a></td>
+<td><a href="https://doi.org/10.1038/s41593-026-02265-5" target="_blank">10.1038/s41593-026-02265-5</a></td>
+<td><a href="https://ngdc.cncb.ac.cn/gsa-human/browse/HRA004942" target="_blank">HRA004942</a></td>
+<td><a href="https://ngdc.cncb.ac.cn/gsa-human/browse/HRA004942" target="_blank">HRA GSA-Human: HRA004942</a></td>
+<td>GBM tumor (TME-focused)</td>
+<td>snATAC (low-throughput platform)</td>
+<td>Primary IDH-WT GBM</td>
+<td class="num">11</td>
+<td class="num yes">11</td>
+<td class="num no">0</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">11</td>
+<td class="num lib-cols-cell lib">11</td>
+<td class="num lib-cols-cell lib">0</td>
+<td class="num">6,735</td>
+<td>main</td>
+<td class="wide"></td>
+<td class="file">cohort_attribution.csv row 5</td>
+<td class="wide">Kun Qu lab. Low cells-per-patient (20-250 malignant/pt) — treat replication cautiously. Previously transcribed as 7 patients in metadata; h5ad actually contained 11 unique donor IDs — corrected v2026-10-11-rc2. H5ad only.</td>
+</tr>
+<tr>
+<td><b>wang_2024</b></td>
+<td>Wang X et al. 2024</td>
+<td class="wide">Single-cell multi-omics sequencing uncovers region-specific plasticity of glioblastoma for complementary therapeutic targeting</td>
+<td>Sci Adv 10(47):eadn4306</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/39576855/" target="_blank">PMID 39576855</a></td>
+<td><a href="https://doi.org/10.1126/sciadv.adn4306" target="_blank">10.1126/sciadv.adn4306</a></td>
+<td><a href="https://db.cngb.org/search/project/CNP0003766/" target="_blank">CNP0003766</a></td>
+<td><a href="https://db.cngb.org/search/project/CNP0003766/" target="_blank">CNGB: CNP0003766</a></td>
+<td>GBM tumor (paired primary/recurrent)</td>
+<td>10x snATAC + DNBelab</td>
+<td>Primary IDH-WT GBM (longitudinal)</td>
+<td class="num">5</td>
+<td class="num yes">5</td>
+<td class="num no">0</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">5</td>
+<td class="num lib-cols-cell lib">5</td>
+<td class="num lib-cols-cell lib">0</td>
+<td class="num">14,378</td>
+<td>main</td>
+<td class="wide"></td>
+<td class="file">cohort_attribution.csv row 6</td>
+<td class="wide">Wuhan + BGI. Paired primary/recurrent sample pairs collapsed to a single patient id in per-cell-type pseudobulk. Slug "wang_2024" retained as historical data identifier. H5ad only.</td>
+</tr>
+<tr>
+<td><b>wang_2019</b></td>
+<td>Wang L et al. 2019</td>
+<td class="wide">The phenotypes of proliferating glioblastoma cells reside on a single axis of variation</td>
+<td>Cancer Discov 9(12):1708-1719</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/31554641/" target="_blank">PMID 31554641</a></td>
+<td><a href="https://doi.org/10.1158/2159-8290.CD-19-0329" target="_blank">10.1158/2159-8290.CD-19-0329</a></td>
+<td><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE138794" target="_blank">GSE138794</a></td>
+<td><a href="https://ftp.ncbi.nlm.nih.gov/geo/series/GSE138nnn/GSE138794/" target="_blank">GEO FTP: GSE138794</a></td>
+<td>GBM tumor</td>
+<td>10x snATAC</td>
+<td>Primary IDH-WT GBM (early-generation)</td>
+<td class="num">3</td>
+<td class="num yes">3</td>
+<td class="num no">0</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">3</td>
+<td class="num lib-cols-cell lib">3</td>
+<td class="num lib-cols-cell lib">0</td>
+<td class="num">6,614</td>
+<td>main</td>
+<td class="wide"></td>
+<td class="file">cohort_attribution.csv row 7</td>
+<td class="wide">Diaz lab. Earlier GBM snATAC-seq cohort; cross-generation methodological control. H5ad only.</td>
+</tr>
+<tr>
+<td><b>guilhamon_2021</b></td>
+<td>Guilhamon P et al. 2021</td>
+<td class="wide">Single-cell chromatin accessibility profiling of glioblastoma identifies an invasive cancer stem cell population associated with lower survival</td>
+<td>eLife 10:e64090</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/33427645/" target="_blank">PMID 33427645</a></td>
+<td><a href="https://doi.org/10.7554/eLife.64090" target="_blank">10.7554/eLife.64090</a></td>
+<td><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE139136" target="_blank">GSE139136</a></td>
+<td><a href="https://ftp.ncbi.nlm.nih.gov/geo/series/GSE139nnn/GSE139136/" target="_blank">GEO FTP: GSE139136</a></td>
+<td>GBM tumor (surgical, GSC-enriched)</td>
+<td>10x snATAC</td>
+<td>Primary IDH-WT GBM</td>
+<td class="num">4</td>
+<td class="num yes">4</td>
+<td class="num no">0</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">4</td>
+<td class="num lib-cols-cell lib">4</td>
+<td class="num lib-cols-cell lib">0</td>
+<td class="num">3,818</td>
+<td>main</td>
+<td class="wide"></td>
+<td class="file">cohort_attribution.csv row 8</td>
+<td class="wide">Gallo (Calgary) / Lupien (PM) labs. Four patients: GBM_4218, GBM_4250, GBM_4275, GBM_4349. Accession corrected v2026-10-14 from GSE139860 (a yeast RNA Pol III study) to GSE139136. Confirmed hg38 by CATLAS peak overlap. H5ad only.</td>
+</tr>
+<tr>
+<td><b>raviram_2023</b></td>
+<td>Raviram R et al. 2023</td>
+<td class="wide">Integrated analysis of single-cell chromatin state and transcriptome identified common vulnerability despite glioblastoma heterogeneity</td>
+<td>PNAS 120(20):e2210991120</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/37155843/" target="_blank">PMID 37155843</a></td>
+<td><a href="https://doi.org/10.1073/pnas.2210991120" target="_blank">10.1073/pnas.2210991120</a></td>
+<td><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE165037" target="_blank">GSE165037</a></td>
+<td><a href="https://ftp.ncbi.nlm.nih.gov/geo/series/GSE165nnn/GSE165037/" target="_blank">GEO FTP: GSE165037</a></td>
+<td>GBM tumor (sci-ATAC)</td>
+<td>sci-ATAC (combinatorial indexing — NOT 10x)</td>
+<td>Primary IDH-WT GBM (orthogonal platform)</td>
+<td class="num">3</td>
+<td class="num yes">2</td>
+<td class="num no">1</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">3</td>
+<td class="num lib-cols-cell lib">2</td>
+<td class="num lib-cols-cell lib">1</td>
+<td class="num">3,327</td>
+<td>main</td>
+<td class="wide">GBM9 excluded — below MIN_CELLS=50 floor. Two additional deposit samples (GBM1, GBM11 IDH-mutant astrocytomas) are out of atlas scope and not counted here.</td>
+<td class="file">cohort_attribution.csv row 9</td>
+<td class="wide">Ren lab (UCSD). Orthogonal technology (sci-ATAC vs 10x) — strong cross-platform validation of top candidates. Cohort previously labeled "nagaraja_2021" — corrected v2026-10-14. Processed RDS only.</td>
+</tr>
+<tr>
+<td><b>pai_2025</b></td>
+<td>Pai B et al. 2025</td>
+<td class="wide">Spatial multiomics defines a shared tumor infiltrative signature at the resection margin in high-grade gliomas</td>
+<td>Cancer Res 85(21):4233-4250</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/40759029/" target="_blank">PMID 40759029</a></td>
+<td><a href="https://doi.org/10.1158/0008-5472.CAN-24-4708" target="_blank">10.1158/0008-5472.CAN-24-4708</a></td>
+<td><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE286415" target="_blank">GSE286415</a></td>
+<td><a href="https://ftp.ncbi.nlm.nih.gov/geo/series/GSE286nnn/GSE286415/" target="_blank">GEO FTP: GSE286415</a></td>
+<td>GBM tumor (Core vs Margin)</td>
+<td>10x snATAC</td>
+<td>Primary IDH-WT GBM (resection margin)</td>
+<td class="num">6</td>
+<td class="num yes">5</td>
+<td class="num no">1</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">6</td>
+<td class="num lib-cols-cell lib">5</td>
+<td class="num lib-cols-cell lib">1</td>
+<td class="num">24,692</td>
+<td>main</td>
+<td class="wide">GBM2 excluded — IDH-mutant, out of atlas scope.</td>
+<td class="file">cohort_attribution.csv row 10</td>
+<td class="wide">Tsankova lab (Mount Sinai). Core (C) and Margin (M) sections plus A/B replicates per patient collapsed to a single patient id in per-cell-type pseudobulk. Author labels mapped: "Myeloid" → TAM; "OL-MG" (oligo-microglia doublet) class dropped. Raw 10x fragments released.</td>
+</tr>
+<tr>
+<td><b>terekhanova_2023</b></td>
+<td>Terekhanova NV et al. 2023</td>
+<td class="wide">Epigenetic regulation during cancer transitions across 11 tumour types</td>
+<td>Nature 623(7986):432-441</td>
+<td><a href="https://pubmed.ncbi.nlm.nih.gov/37914932/" target="_blank">PMID 37914932</a></td>
+<td><a href="https://doi.org/10.1038/s41586-023-06682-5" target="_blank">10.1038/s41586-023-06682-5</a></td>
+<td><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE240822" target="_blank">GSE240822</a></td>
+<td><a href="https://ftp.ncbi.nlm.nih.gov/geo/series/GSE240nnn/GSE240822/" target="_blank">GEO FTP: GSE240822</a></td>
+<td>GBM tumor (CPTAC-GBM)</td>
+<td>10x snATAC (CellRanger-atac v2.0)</td>
+<td>Primary IDH-WT GBM (CPTAC)</td>
+<td class="num">18</td>
+<td class="num yes">14</td>
+<td class="num no">4</td>
+<td class="num pend">0</td>
+<td class="num lib-cols-cell lib">18</td>
+<td class="num lib-cols-cell lib">14</td>
+<td class="num lib-cols-cell lib">4</td>
+<td class="num">102,016</td>
+<td>main</td>
+<td class="wide">Four exclusions: C3N-00663 (IDH-mutant); C3L-03968 (pediatric-type HGG); C3N-02181 + C3N-02783 (methylation class CONTR_REACT — not molecularly GBM). C3L-02705 kept with pathology-review caveat.</td>
+<td class="file">cohort_attribution.csv row 11</td>
+<td class="wide">Ding lab (WashU). Triaged against Wang 2021 Cancer Cell Table S1 (IDH + methylation class) + GDC SSM API (IDH1/IDH2 somatic mutation cross-check). Cell-type mapping: Macrophages→TAM, Oligodendrocytes→oligodendrocyte, T-cells→T_cell, Neurons→neuron, OPC→OPC, Astrocytes→astrocyte, Tumor→malignant. Pericytes (1,151 cells) + Low-quality (4) + Microglia (61, all below MIN_CELLS per-donor) dropped. 97,604 novel peaks contributed to v7 union. Raw 10x fragments released.</td>
+</tr>
+</tbody></table>
+<div class="totals">
+<b>Totals:</b> 10 cohorts
+&nbsp;·&nbsp; <b>Patients:</b> 76 total &nbsp;|&nbsp; <span class="yes">67 used (YES)</span> &nbsp;|&nbsp; <span class="no">9 excluded (NO)</span> &nbsp;|&nbsp; <span class="pend">0 pending</span>
+&nbsp;·&nbsp; <b>Libraries:</b> 76 total · 67 used
+&nbsp;·&nbsp; <b>Cells:</b> 1,650,376
+&nbsp;·&nbsp; <b>Union peaks:</b> 2,085,175 (v7, CATLAS 544k ∪ MACS3-novel)
+</div>
+<div class="sub" style="margin-top:14px;font-size:12px">
+<b>Fragment-mode vs h5ad-only cohorts:</b><br>
+Fragment-released (4 cohorts, 30 patients): <b>sundaram_2024</b>, <b>sojka_2025</b>, <b>pai_2025</b>, <b>terekhanova_2023</b> — raw 10x <code>fragments.tsv.gz</code> on GEO/GDC, re-counted at every v7 union peak coordinate including the 97,604 Terekhanova-novel and 28,818 Pai-novel peaks.<br>
+H5ad-only (6 cohorts, 37 patients): <b>dejong_2026</b>, <b>lin_2026</b>, <b>wang_2024</b>, <b>wang_2019</b>, <b>guilhamon_2021</b>, <b>raviram_2023</b> — processed h5ad/RDS carries pre-called peak coordinates. These cohorts zero-fill at novel-peak rows, so <code>n_cohorts</code> for novel peaks caps at 4, not 10. Restrict cross-cohort replicability sweeps to fragment-mode cohorts for fair comparisons.
+</div>
+<div class="sub" style="margin-top:14px;font-size:12px">
+<b>Current atlas snapshot:</b> v2026-11-15 (AT9 excitatory-neuron CNV cluster excluded from neuron track).<br>
+<b>Zenodo concept DOI</b> (always-latest): <a href="https://doi.org/10.5281/zenodo.23252323" target="_blank">10.5281/zenodo.23252323</a> · <b>v2026-11-15 version DOI:</b> <a href="https://doi.org/10.5281/zenodo.24270756" target="_blank">10.5281/zenodo.24270756</a>.<br>
+<b>Code:</b> <a href="https://github.com/jpmcginnis/mcginnislab-data" target="_blank">data.mcginnislab.org</a> (hosting manifest). <b>Scoring config:</b> <code>scripts/scoring_config.py</code> locks <code>log2FC_basis = strength_frags_per_cell_wn</code> at import time.
+</div>
+</body></html>
