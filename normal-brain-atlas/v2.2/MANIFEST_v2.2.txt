@@ -1,0 +1,11 @@
+NB_atlas_union_v2.2
+LOCKED 2026-11-22T13:37:35Z
+peaks         2716413
+md5           db7c6edee31437bee6946cfd8185cd3a
+bytes         106299275
+columns       chrom\tstart\tend\tsource\tpeak_width
+source        backbone (v2.1 CATLAS v2 2024 + 9 cohorts) + 17 Group-2 cohorts (native author boundaries)
+replicability >=1 study (loose; preserves unique-study biology)
+provenance    s3://jpm-atacseq-archive-2026/nb_v2.1_rebuild_2026-11-22/union/true_union_v2.2.FINAL.bed
+peak_id       nb_v22_<7-digit index> (assigned at ingest time in order of sorted BED position)
+status        LOCKED - do not modify. New cohort peaks go into v2.2.ext or wait for v2.3.

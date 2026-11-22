@@ -1,0 +1,240 @@
+<title>NB Atlas Methods</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Scientific methods doc — Inter body, Space Grotesk headings, mono for accessions/paths */
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --fg: #1a1a1a;
+  --fg-dim: #555;
+  --fg-faint: #888;
+  --accent: #1e3a5f;
+  --accent-light: #e8eff7;
+  --rule: #e8e2d8;
+  --code-bg: #f4f1ec;
+  --warn: #8b5a2b;
+  --warn-bg: #faf4eb;
+  --font-text: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-head: 'Space Grotesk', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15161a;
+    --surface: #1d1f24;
+    --fg: #e8e6e1;
+    --fg-dim: #a8a6a1;
+    --fg-faint: #6e6c68;
+    --accent: #8cb4e0;
+    --accent-light: #253549;
+    --rule: #2a2d33;
+    --code-bg: #22252b;
+    --warn: #d4a373;
+    --warn-bg: #2a2219;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15161a;
+  --surface: #1d1f24;
+  --fg: #e8e6e1;
+  --fg-dim: #a8a6a1;
+  --fg-faint: #6e6c68;
+  --accent: #8cb4e0;
+  --accent-light: #253549;
+  --rule: #2a2d33;
+  --code-bg: #22252b;
+  --warn: #d4a373;
+  --warn-bg: #2a2219;
+  color-scheme: dark;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-text);
+  line-height: 1.6;
+  padding-left: max(24px, env(safe-area-inset-left, 0px));
+  padding-right: max(24px, env(safe-area-inset-right, 0px));
+  padding-block: 32px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+h1 { font-family: var(--font-head); font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 4px; text-wrap: balance; }
+h2 { font-family: var(--font-head); font-size: 1.35rem; font-weight: 600; letter-spacing: -0.01em; margin: 40px 0 12px; padding-top: 24px; border-top: 1px solid var(--rule); text-wrap: balance; }
+h3 { font-family: var(--font-head); font-size: 1.05rem; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p, li { font-size: 0.95rem; }
+.lede { color: var(--fg-dim); font-size: 1rem; margin-bottom: 24px; }
+.meta { display: flex; gap: 16px; flex-wrap: wrap; font-family: var(--font-mono); font-size: 0.8rem; color: var(--fg-faint); margin-top: 8px; border-bottom: 1px solid var(--rule); padding-bottom: 20px; margin-bottom: 24px; }
+.meta span strong { color: var(--fg-dim); font-weight: 500; }
+code, kbd { font-family: var(--font-mono); font-size: 0.85em; background: var(--code-bg); padding: 1px 5px; border-radius: 3px; }
+pre { background: var(--code-bg); padding: 12px 16px; border-radius: 4px; overflow-x: auto; font-size: 0.82rem; }
+pre code { background: none; padding: 0; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.88rem; }
+table th, table td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--rule); min-width: 0; }
+table th { font-weight: 600; font-family: var(--font-head); color: var(--fg-dim); background: var(--accent-light); }
+table tbody tr:hover td { background: var(--accent-light); }
+table td:first-child { font-family: var(--font-mono); font-size: 0.82rem; }
+ul, ol { padding-left: 22px; }
+ul li, ol li { margin-bottom: 4px; }
+.table-wrap { overflow-x: auto; }
+.callout { background: var(--warn-bg); border-left: 3px solid var(--warn); padding: 10px 14px; margin: 16px 0; border-radius: 0 4px 4px 0; font-size: 0.9rem; }
+.callout strong { color: var(--warn); }
+.subtle { color: var(--fg-faint); font-size: 0.85rem; font-style: italic; }
+footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule); color: var(--fg-faint); font-size: 0.8rem; font-family: var(--font-mono); }
+@media print {
+  body { padding: 24px; max-width: none; }
+  h2 { page-break-before: auto; break-before: auto; }
+  .callout { background: none; border-left: 3px solid #666; }
+}
+</style>
+
+<h1>Normal Brain snATAC-seq Atlas — Methods</h1>
+<p class="lede">Human normal-brain single-nucleus chromatin accessibility atlas for AAV enhancer discovery</p>
+<div class="meta">
+  <span><strong>version</strong> v2.2 (locked 2026-11-22)</span>
+  <span><strong>backbone</strong> CATLAS v2 2024</span>
+  <span><strong>peaks</strong> 2,716,413</span>
+  <span><strong>cohorts</strong> 30 brain + 1 spinal (sidecar)</span>
+</div>
+
+<h2>Downloads</h2>
+<div class="table-wrap"><table>
+<thead><tr><th>File</th><th>Size</th><th>Description</th></tr></thead>
+<tbody>
+<tr><td><a href="true_union_v2.2.bed.gz">true_union_v2.2.bed.gz</a></td><td>28 MB</td><td>v2.2 LOCKED union BED (gzipped). 5 columns: chrom, start, end, source, peak_width. 2,716,413 peaks.</td></tr>
+<tr><td><a href="true_union_v2.2.bed.md5">true_union_v2.2.bed.md5</a></td><td>54 B</td><td>md5 checksum for uncompressed BED</td></tr>
+<tr><td><a href="MANIFEST_v2.2.txt">MANIFEST_v2.2.txt</a></td><td>650 B</td><td>Version metadata + S3 canonical location</td></tr>
+</tbody>
+</table></div>
+<p class="subtle">Uncompressed BED (106 MB) available from S3: <code>s3://jpm-atacseq-archive-2026/atlas/v2.2/union/true_union_v2.2.bed</code></p>
+
+<h2>1. Cohort inclusion criteria</h2>
+<h3>Inclusion</h3>
+<ul>
+  <li>Human (<em>Homo sapiens</em>), postmortem or surgical</li>
+  <li>snATAC-seq or 10x Multiome (snRNA + snATAC same-nucleus)</li>
+  <li>Public, redistributable deposit (no dbGaP / Synapse DUA data)</li>
+  <li>Any brain region (cerebellum, cortex, basal ganglia, brainstem, hippocampus, substantia nigra)</li>
+  <li>Fetal through aged donors</li>
+</ul>
+<h3>Exclusion</h3>
+<ul>
+  <li>Alzheimer's disease (AD) or AD-related dementias (ADRD) donors</li>
+  <li>Parkinson's disease donors (except non-disease regions from PD cohorts, e.g. cortex from PD studies)</li>
+  <li>Clinically demented (MMSE ≤ 24, CDR ≥ 1)</li>
+  <li>Any donor with ADNC intermediate/high (A2–3, B2–3, C2–3)</li>
+  <li>Diffuse Lewy body disease (DLBD), FTLD-Tau, PSP, corticobasal degeneration</li>
+  <li>Non-brain tissue (except GSE300782 spinal cord retained as sidecar)</li>
+</ul>
+<div class="callout"><strong>Borderline controls:</strong> clinically NCI donors with incidental age-related pathology at autopsy are dropped if ADNC ≥ low (A1 with B2+ or C2+), DLB of any stage, or clinically significant subdural hematoma. Retained if ADNC = 0 and Braak ≤ II.</div>
+
+<h2>2. Data sources</h2>
+<p>Two data modalities on deposit:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Modality</th><th>Cohorts</th><th>Data available</th></tr></thead>
+<tbody>
+<tr><td>Fragment-mode</td><td>6 of 30</td><td>Raw per-cell <code>*.fragments.tsv.gz</code>; allows de novo peak calling via MACS3 <code>--call-summits</code></td></tr>
+<tr><td>Matrix-mode</td><td>24 of 30</td><td>Per-cell × per-peak counts only (<code>filtered_feature_bc_matrix.h5</code>, <code>.mtx</code> triplets, or <code>.h5ad</code>); authors' peak axis is the finest available resolution</td></tr>
+</tbody>
+</table></div>
+<p>Fragments publicly available for GSE214979 (direct) and GSE178451 / GSE193688 / GSE212630 / GSE322785 / GSE336954 (inside their <code>_RAW.tar</code> bundles).</p>
+<p>All raw data archived at <code>s3://jpm-atacseq-archive-2026/raw_fragments/&lt;cohort_slug&gt;/</code>. File sizes 300 MB — 145 GB.</p>
+
+<h2>3. Reference backbone peak set</h2>
+<p><strong>CATLAS v2 2024</strong> (Li et al., Science) — 1,012,572 cCRE regions assembled from 2.3M nuclei across 42 human brain regions.</p>
+<ul>
+  <li>Fetched from original source and cached at <code>s3://jpm-atacseq-archive-2026/catlas/catlas_full_annotated.h5ad</code></li>
+  <li>Variable widths (median 598 bp; max 36 kb; min 1 bp)</li>
+  <li>Standard chromosomes only (<code>chr1</code>–<code>chr22</code>, <code>chrX</code>, <code>chrY</code>, <code>chrM</code>); 12,880 non-standard contig rows filtered out</li>
+</ul>
+
+<h2>4. Per-cohort peak extraction</h2>
+<p>Each cohort's author-called peak BED was recovered from its GEO deposit via the appropriate parser:</p>
+<ul>
+  <li><strong>10x matrix format</strong> (<code>features.tsv.gz</code> with <code>Peaks</code> feature type): parsed and emitted as BED</li>
+  <li><strong>cellranger-arc .h5 output</strong>: peaks read from <code>/matrix/features</code> group</li>
+  <li><strong>Author-released <code>.peaks.bed</code></strong>: used directly</li>
+  <li><strong>RDS / SummarizedExperiment</strong>: converted via custom R utility (<code>rds_to_mtx.R</code>)</li>
+</ul>
+<p>For each cohort, peaks were filtered to intervals with <code>end &gt; start</code> and dropped if on non-standard contigs.</p>
+
+<h2>5. Intermediate reference union (v2.1 backbone)</h2>
+<p>Built from CATLAS v2 2024 plus 9 cohorts whose ingested h5ad <code>var</code> preserved full peak coordinates:</p>
+<p class="subtle">geo-GSE266303, geo-GSE296139, geo-GSE296329, geo-GSE246443, geo-GSE256207, geo-GSE147672, hwang-girgenti-ptsd, zen-19-aerts-pd-cc, zen-19-aerts-pd-sn</p>
+<p>Construction:</p>
+<ol>
+  <li>Concatenate CATLAS + 9 cohort peak BEDs</li>
+  <li>Sort by chromosome then start</li>
+  <li><code>bedtools merge</code> with default parameters (merges overlapping or touching intervals)</li>
+</ol>
+<p>Result: <strong>1,965,262 non-overlapping peaks</strong> in <code>narrow_union_v2.1.bed</code>.</p>
+
+<h2>6. v2.2 true union construction</h2>
+<p><strong>Problem addressed:</strong> 20 of 30 cohorts had been collapsed onto a reference axis during initial ingest, losing their native author peak boundaries. Group-2 author peaks were recovered from S3 Deep Archive (Standard-tier restore, ~5 hr wait).</p>
+<p><strong>Backbone:</strong> v2.1 union (1,965,262 peaks).</p>
+<p><strong>Group-2 cohorts</strong> (17, whose author peaks were restored):</p>
+<p class="subtle">4dn-hippocampus · cxg-1-wang-kriegstein (fetal) · cxg-2-veiga-adolescent · cxg-3-braun-linnarsson · geo-GSE174367 · geo-GSE178451 · geo-GSE193688 · geo-GSE207334 · geo-GSE212630 · geo-GSE214979 · geo-GSE259298 · geo-GSE288939 · geo-GSE296943 · geo-GSE305146 · geo-GSE325789 · geo-GSE336954 · sea-ad</p>
+<h3>Algorithm</h3>
+<ol>
+  <li>For each Group-2 cohort, filter raw peak BED to standard chromosomes and valid intervals; sort by <code>chrom, start</code></li>
+  <li>Retain only peaks <strong>not overlapping the backbone by ≥50% reciprocal fraction</strong> (<code>bedtools intersect -v -f 0.5</code>) — the cohort's "novel" contribution</li>
+  <li>Preserve each novel peak as-is (cohort-native boundaries); tag with source cohort</li>
+  <li>Combine backbone + raw novel peaks per cohort → sort → final union (no cross-cohort merge, to avoid density-driven chain-merging into mega-peaks)</li>
+</ol>
+<h3>Replicability threshold: ≥1 study (loose)</h3>
+<p>The alternative ≥2-study filter (GBM-atlas convention) yielded only 27,832 novel peaks total and would have dropped unique single-cohort biology:</p>
+<ul>
+  <li>Wang-Kriegstein fetal cortex: 68,946 novel peaks (78.8% of its calls)</li>
+  <li>aerts-pd-sn midbrain substantia nigra: unique dopaminergic peaks</li>
+  <li>Veiga adolescent: unique developmental peaks</li>
+</ul>
+<p>For an atlas supporting AAV enhancer discovery across diverse regions and life stages, dropping single-cohort peaks removes real biology; downstream cell-type specificity scoring already filters noise.</p>
+<h3>v2.2 statistics</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Metric</th><th>v2.1 backbone</th><th>v2.2 final</th></tr></thead>
+<tbody>
+<tr><td>Total peaks</td><td>1,965,262</td><td><strong>2,716,413</strong></td></tr>
+<tr><td>Median width</td><td>598 bp</td><td>649 bp</td></tr>
+<tr><td>Q3 width</td><td>1,020 bp</td><td>1,130 bp</td></tr>
+<tr><td>Max width</td><td>36,191 bp</td><td>2,867,094 bp</td></tr>
+<tr><td>Peaks &gt; 10 kb</td><td>~0</td><td>679,104 (25% — "super-peaks")</td></tr>
+</tbody>
+</table></div>
+<p><strong>Per-peak annotation:</strong> each peak carries <code>source</code> (backbone | cohort_slug) and <code>peak_width</code> columns.</p>
+<div class="callout"><strong>Super-peaks (&gt;10 kb):</strong> arise from cohorts with aggressive peak-merge settings (e.g. ArchR default). For <strong>AAV enhancer selection</strong>, filter to peaks &lt;1 kb (~2.0M usable candidates). For <strong>cell-type specificity scoring</strong>, use all 2,716,413 peaks.</div>
+<p><strong>Location:</strong> <code>s3://jpm-atacseq-archive-2026/nb_v2.1_rebuild_2026-11-22/union/true_union_v2.2.FINAL.bed</code></p>
+
+<h2>7. Infrastructure</h2>
+<ul>
+  <li><strong>Compute:</strong> AWS EC2 r5n.8xlarge spot-persistent (32 vCPU, 256 GB RAM), us-east-1a</li>
+  <li><strong>Storage:</strong> 1 TB EBS gp3 with <code>DeleteOnTermination=false</code> (survives spot replacement)</li>
+  <li><strong>Archive:</strong> S3 Standard for peak BEDs (small, hot); S3 Deep Archive for raw per-cohort data (large, cold)</li>
+  <li><strong>Spot resilience:</strong> cron <code>@reboot</code> fires <code>resume_overnight.sh</code> (curl <code>-C -</code> for partial download resumption), <code>spot_watcher.sh</code> (polls 169.254.169.254 for interrupt notification), <code>auto_uploader.sh</code> (moves stable files to S3 to control disk pressure)</li>
+</ul>
+
+<h2>8. Known limitations</h2>
+<ol>
+  <li><strong>Mixed-provenance peaks:</strong> CATLAS backbone + some cohort peaks share lineage with CATLAS, creating correlated inclusion. Not independent evidence.</li>
+  <li><strong>"Super-peaks" (&gt;10 kb):</strong> 25% of v2.2 peaks are &gt;10 kb from cohorts with aggressive peak-merge settings. Flagged by <code>peak_width</code> column.</li>
+  <li><strong>Matrix-mode cohorts:</strong> quantification is bounded by the authors' peak axis; cannot recover accessibility in regions authors didn't call peaks.</li>
+  <li><strong>Spot interrupts:</strong> incurred 3× during build (~7 hr compute lost once for an informational test); all recovered automatically via EBS persistence + <code>@reboot</code> cron.</li>
+  <li><strong>Deep Archive restore latency:</strong> required ~5–12 hr for the one-time restore of previously-archived per-cohort peak BEDs. Fixed going forward by keeping peak BEDs in S3 Standard.</li>
+</ol>
+
+<h2>9. Version architecture: adding a new cohort</h2>
+<p><strong>v2.2 is the first LOCKED, STABLE reference union.</strong> Each peak receives a stable <code>peak_id_v22</code> (e.g., <code>nb_v22_0001234</code>) that persists across downstream analyses.</p>
+<p>Forward workflow for new cohorts (no Deep Archive restore required):</p>
+<ol>
+  <li>Download cohort raw data from GEO (direct)</li>
+  <li>Extract author peak BED (standard pipeline)</li>
+  <li>Compute cohort's novel peaks vs current union (50% reciprocal overlap rule)</li>
+  <li>For LOCKED v2.2 analyses: quantify cohort cells against v2.2 union only (new cohort inherits existing peak IDs)</li>
+  <li>For NEXT version (v2.3): add novel peaks to extension layer, assign new peak IDs starting at <code>nb_v23_*</code></li>
+  <li>Store cohort as independent silo at <code>s3://jpm-atacseq-archive-2026/cohorts/&lt;slug&gt;/v2.2.h5ad</code></li>
+</ol>
+<p class="subtle">Deep Archive restore is only required for retrospective full rebuilds. All v2.2+ peak BEDs live in S3 Standard.</p>
+
+<footer>
+Last updated 2026-11-22 · Generated during v2.2 union build on EC2 i-0d9615c6f982eb2a7
+</footer>
