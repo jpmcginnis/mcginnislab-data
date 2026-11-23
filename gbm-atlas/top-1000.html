@@ -144,44 +144,24 @@
 
 <div class="main">
   <div class="caveats">
-    <strong>v4 primary ranking (rank-percentile sum):</strong> Top-1000 per cell type ranked by
+    <strong>Primary ranking (rank-percentile sum).</strong> Top-1000 per cell type ranked by
     <code>primary_score = (spec_pct + strength_pct) / 2</code>, where <code>spec_pct</code> is the percentile rank of
     <code>log2FC_top_vs_next</code> and <code>strength_pct</code> is the percentile rank of
     <code>strength_frags_per_cell_wn</code>, both computed within distal peaks.
-    <br>
-    <strong>v4 strength (plain, no Poisson):</strong>
-    <code>strength = mean over evaluable patients of (fragments / cells × 500 / peak_width_bp)</code>.
-    Width-normalized Tn5 fragments per cell, no model assumption.
+    All log2FC values (vs_primary, myeloid, malignant subtypes) are computed from <code>strength_frags_per_cell_wn</code>.
+    Strength = mean over evaluable patients of <code>(fragments / cells × 500 / peak_width_bp)</code> width-normalized Tn5 fragments per cell.
     <br><br>
     <strong>Myeloid-tab log2FC special meaning.</strong> On the myeloid (combined) tab only, the log2FC column is redefined as
-    <code>log2( min(strength_microglia, strength_TAM) / max(strength among non-myeloid primary CTs) )</code> — i.e., does the
-    <em>weaker</em> of the two myeloid children still outrun the strongest non-myeloid off-target? This makes the column
-    sortable as a pan-myeloid AAV-candidate ranking. All other tabs use <code>log2FC_vs_primary</code> as usual.
-    <br>
-    <strong>All log2FC values (vs_primary, myeloid, malignant subtypes) are computed from
-    <code>strength_frags_per_cell_wn</code></strong>, not from CPM. This is the canonical basis as of
-    v2026-11-11 (see <code>scripts/scoring_config.py</code> in the repo).
-    <br><br>
-    <strong>v7 novel-peak replication caveat.</strong> 97,604 peaks are novel in v2026-11-10 (contributed by Terekhanova 2023);
-    28,818 earlier peaks are novel in v2026-11-05 (contributed by Pai 2025). Only the four fragment-released cohorts
-    (sojka_2025, sundaram_2024, pai_2025, terekhanova_2023) can be counted at novel-peak coordinates — the other 6 cohorts
-    zero-fill. So n_cohorts for novel peaks is capped at 4 (or 3 for pre-Pai), not 10.
+    <code>log2( min(strength_microglia, strength_TAM) / max(strength among non-myeloid primary CTs) )</code> — i.e., how much does the
+    <em>weaker</em> of the two myeloid lines still outrun the strongest non-myeloid off-target? (All other tabs use <code>log2FC_vs_primary</code> as usual.)
     <br><br>
     <strong>Amplicon/CN caveat.</strong> Peaks within ±1 Mb of chr7p11.2 EGFR, chr12q15 MDM2, chr8q24 MYC, or chr9p21.3 CDKN2A carry an
     <strong class="amp-flag">AMP</strong> badge. In NON-malignant tabs the badge flags ambient-fragment contamination.
     In MALIGNANT tabs it flags copy-number inflation of per-cell fragment counts.
     <br><br>
-    <strong>Excitatory-neuron contamination filter (2026-11-15).</strong> The excitatory-neuron track excludes
-    <code>dejong_2026</code> patient <b>AT9</b> (n = 265 cells) after a per-pseudobulk audit found this one pseudobulk contributed
-    <b>46–280×</b> the next-highest per-cell fragment density at every suspect locus (chr1, chr7, chr12, chr16), while canonical
-    neuron-marker peaks (e.g. SNAP25) showed normal signal. The pattern is consistent with a small cluster of CNV-heavy malignant
-    cells mis-labeled as "neuron" during annotation; no other pseudobulk in any cell type showed comparable contamination.
-    Pre-exclusion scores are preserved in <code>data/matrix/v4_master_scores.pre_at9_exclusion.parquet</code>.
-    <br><br>
     <strong>Nearest-gene is informational only.</strong>
     <br><br>
-    <strong>Why n_patients_evaluable &lt; 30?</strong> pt_cap (30) is the atlas-wide fragment-eligible patient ceiling (patients in cohorts whose raw fragments cover novel-peak coordinates).
-    n_eval is the patients with a surviving pseudobulk of that cell type (≥50 cells).
+    <code>n_eval</code> is the patients with a surviving pseudobulk of that cell type (≥50 cells).
     Rare cell types (astrocyte, GABA_neuron, T_cell, endothelial) have &lt;30 evaluable patients because fewer patients have that cell type at ≥50 cells.
     <br><br>
     <strong>Hover any column header for its definition and formula.</strong>
