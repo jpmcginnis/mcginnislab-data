@@ -144,6 +144,8 @@
 
 <div class="main">
   <div class="caveats">
+    <strong>Hover over any column header for its definition and formula. Click a row for further details, including UCSC link, contributing cohorts, and graphs comparing cell types.</strong>
+    <br><br>
     <strong>Primary ranking (rank-percentile sum).</strong> Top-1000 per cell type ranked by
     <code>primary_score = (spec_pct + strength_pct) / 2</code>, where <code>spec_pct</code> is the percentile rank of
     <code>log2FC_top_vs_next</code> and <code>strength_pct</code> is the percentile rank of
@@ -163,8 +165,6 @@
     <br><br>
     <code>n_eval</code> is the patients with a surviving pseudobulk of that cell type (≥50 cells).
     Rare cell types (astrocyte, GABA_neuron, T_cell, endothelial) have &lt;30 evaluable patients because fewer patients have that cell type at ≥50 cells.
-    <br><br>
-    <strong>Hover over any column header for its definition and formula. Click a row for further details, including UCSC link, contributing cohorts, and graphs comparing cell types.</strong>
   </div>
 
   <div id="table-container">
