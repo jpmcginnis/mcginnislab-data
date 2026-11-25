@@ -646,7 +646,7 @@ async function renderTopScatter(ct) {
           <dt>width</dt><dd>${d.widths[i]} bp</dd>
           <dt>strength (frag/cell)</dt><dd>${d.xs[i].toFixed(4)} <span class="aux">(${(d.strpct[i]/10).toFixed(1)} %ile)</span></dd>
           <dt>log2FC</dt><dd>${d.ys[i].toFixed(2)} <span class="aux">(${(d.spec[i]/10).toFixed(1)} %ile)</span></dd>
-          <dt>primary score</dt><dd>${(d.prim[i]/10).toFixed(1)} <span class="aux">%ile</span></dd>
+          <dt>primary score</dt><dd>${(d.prim[i]/1000).toFixed(3)}</dd>
         </dl>
         <div class="sep"></div>
         <dl class="dim">
