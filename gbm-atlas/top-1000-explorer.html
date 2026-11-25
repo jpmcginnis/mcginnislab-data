@@ -526,14 +526,14 @@ async function renderMiniScatter(frame, peak_id, ct) {
         cctx.fillText('▲ ' + d.ys[idx].toFixed(1), px, 20);
       }
     }
-    const xticks = [0.1, 0.2, 0.3, 0.4, 0.5];
-    xticks.forEach(v => {
-      if (v > d.xmax) return;
+    const xStep = d.xmax < 0.3 ? 0.05 : d.xmax < 0.6 ? 0.1 : d.xmax < 1.5 ? 0.2 : 0.5;
+    for (let v = xStep; v <= d.xmax + 1e-6; v += xStep) {
       const el = document.createElement('div');
-      el.className = 'mini-tick x'; el.textContent = v.toFixed(1);
+      el.className = 'mini-tick x';
+      el.textContent = (xStep < 0.1) ? v.toFixed(2) : v.toFixed(1);
       el.style.left = x2px(v) + 'px';
       frame.appendChild(el);
-    });
+    }
     const yStep = d.ymax > 10 ? 2 : (d.ymax > 4 ? 1 : 0.5);
     for (let v = yStep; v <= d.ymax + 0.001; v += yStep) {
       const el = document.createElement('div');
@@ -601,14 +601,14 @@ async function renderTopScatter(ct) {
     }
 
     // Ticks — position as percentages so they follow when the frame resizes
-    const xticks = [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5];
-    xticks.forEach(v => {
-      if (v > d.xmax) return;
+    const xStep = d.xmax < 0.3 ? 0.05 : d.xmax < 0.6 ? 0.1 : d.xmax < 1.5 ? 0.2 : 0.5;
+    for (let v = xStep; v <= d.xmax + 1e-6; v += xStep) {
       const el = document.createElement('div');
-      el.className = 'tick x'; el.textContent = v.toFixed(2);
+      el.className = 'tick x';
+      el.textContent = (xStep < 0.1) ? v.toFixed(2) : v.toFixed(1);
       el.style.left = (v / d.xmax * 100) + '%';
       frame.appendChild(el);
-    });
+    }
     const yStep = d.ymax > 10 ? 2 : (d.ymax > 4 ? 1 : 0.5);
     for (let v = yStep; v <= d.ymax + 0.001; v += yStep) {
       const el = document.createElement('div');
