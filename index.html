@@ -11,33 +11,83 @@
     --bg: #ffffff;
     --border: #e2e2e2;
     --accent: #2a6df4;
+    --accent-logo: #6FB7E6;
+    --eyebrow: #2a6df4;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-family: var(--sans);
     color: var(--fg);
     background: var(--bg);
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .site-header {
+    position: relative;
+    overflow: hidden;
+    background: #000000;
+    color: #ffffff;
+    padding: 56px 24px 44px;
+  }
+  .header-inner {
     max-width: 720px;
     margin: 0 auto;
-    padding: 48px 24px 96px;
+    position: relative;
+    z-index: 2;
+  }
+  .site-header .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px 0;
+  }
+  .logo-peek {
+    position: absolute;
+    top: 50%;
+    right: -230px;
+    transform: translateY(-50%);
+    width: 520px;
+    height: 520px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .logo-peek svg { width: 100%; height: 100%; display: block; }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 36px 24px 96px;
   }
   h1 {
+    font-family: var(--sans);
     font-size: 22px;
     font-weight: 600;
-    margin: 0 0 6px 0;
+    letter-spacing: -0.005em;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+    color: #ffffff;
   }
   .sub {
-    color: var(--muted);
+    color: #a6a6a6;
     font-size: 14px;
-    margin-bottom: 36px;
+    margin: 0;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    max-width: 520px;
   }
   h2 {
-    font-size: 15px;
+    font-family: var(--sans);
+    font-size: 22px;
     font-weight: 600;
-    margin: 32px 0 10px;
-    padding-bottom: 6px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg);
+    margin: 52px 0 18px;
+    padding-bottom: 12px;
     border-bottom: 1px solid var(--border);
   }
   ul.reports {
@@ -133,18 +183,31 @@
     font-family: inherit;
   }
   footer {
-    margin-top: 48px;
-    padding-top: 16px;
+    margin-top: 56px;
+    padding-top: 20px;
     border-top: 1px solid var(--border);
     color: var(--muted);
     font-size: 12px;
+    letter-spacing: 0.02em;
   }
   footer a { color: var(--muted); }
+  @media (max-width: 620px) {
+    .logo-peek { right: -320px; }
+    h1 { font-size: 22px; }
+  }
 </style>
 </head>
 <body>
-  <h1>McGinnis Lab — Data</h1>
-  <div class="sub">Interactive reports and supplementary data from the McGinnis Lab.</div>
+  <header class="site-header">
+    <div class="logo-peek" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><circle cx="60" cy="12" r="3.4" fill="#3F3F3F"></circle><circle cx="72.42" cy="13.64" r="3.4" fill="#3F3F3F"></circle><circle cx="84" cy="18.43" r="3.4" fill="#3F3F3F"></circle><circle cx="93.94" cy="26.06" r="3.4" fill="#3F3F3F"></circle><circle cx="101.57" cy="36" r="3.4" fill="#3F3F3F"></circle><circle cx="106.36" cy="47.58" r="3.4" fill="#3F3F3F"></circle><circle cx="108" cy="60" r="3.4" fill="#3F3F3F"></circle><circle cx="106.36" cy="72.42" r="3.4" fill="#3F3F3F"></circle><circle cx="101.57" cy="84" r="3.4" fill="#3F3F3F"></circle><circle cx="93.94" cy="93.94" r="3.4" fill="#3F3F3F"></circle><circle cx="84" cy="101.57" r="3.4" fill="#3F3F3F"></circle><circle cx="72.42" cy="106.36" r="3.4" fill="#3F3F3F"></circle><circle cx="60" cy="108" r="3.4" fill="#3F3F3F"></circle><circle cx="47.58" cy="106.36" r="3.4" fill="#3F3F3F"></circle><circle cx="36" cy="101.57" r="3.4" fill="#3F3F3F"></circle><circle cx="26.06" cy="93.94" r="3.4" fill="#3F3F3F"></circle><circle cx="18.43" cy="84" r="3.4" fill="#3F3F3F"></circle><circle cx="13.64" cy="72.42" r="3.4" fill="#3F3F3F"></circle><circle cx="12" cy="60" r="3.4" fill="#3F3F3F"></circle><circle cx="13.64" cy="47.58" r="3.4" fill="#3F3F3F"></circle><circle cx="18.43" cy="36" r="3.4" fill="#3F3F3F"></circle><circle cx="26.06" cy="26.06" r="3.4" fill="#3F3F3F"></circle><circle cx="36" cy="18.43" r="3.4" fill="#3F3F3F"></circle><circle cx="47.58" cy="13.64" r="3.4" fill="#3F3F3F"></circle><circle cx="60" cy="24" r="3.4" fill="#7F7F7F"></circle><circle cx="72.31" cy="26.17" r="3.4" fill="#7F7F7F"></circle><circle cx="83.14" cy="32.42" r="3.4" fill="#7F7F7F"></circle><circle cx="91.18" cy="42" r="3.4" fill="#7F7F7F"></circle><circle cx="95.45" cy="53.75" r="3.4" fill="#7F7F7F"></circle><circle cx="95.45" cy="66.25" r="3.4" fill="#7F7F7F"></circle><circle cx="91.18" cy="78" r="3.4" fill="#7F7F7F"></circle><circle cx="83.14" cy="87.58" r="3.4" fill="#7F7F7F"></circle><circle cx="72.31" cy="93.83" r="3.4" fill="#7F7F7F"></circle><circle cx="60" cy="96" r="3.4" fill="#7F7F7F"></circle><circle cx="47.69" cy="93.83" r="3.4" fill="#7F7F7F"></circle><circle cx="36.86" cy="87.58" r="3.4" fill="#7F7F7F"></circle><circle cx="28.82" cy="78" r="3.4" fill="#7F7F7F"></circle><circle cx="24.55" cy="66.25" r="3.4" fill="#7F7F7F"></circle><circle cx="24.55" cy="53.75" r="3.4" fill="#7F7F7F"></circle><circle cx="28.82" cy="42" r="3.4" fill="#7F7F7F"></circle><circle cx="36.86" cy="32.42" r="3.4" fill="#7F7F7F"></circle><circle cx="47.69" cy="26.17" r="3.4" fill="#7F7F7F"></circle><circle cx="60" cy="36" r="3.4" fill="#BFBFBF"></circle><circle cx="72" cy="39.22" r="3.4" fill="#BFBFBF"></circle><circle cx="80.78" cy="48" r="3.4" fill="#BFBFBF"></circle><circle cx="84" cy="60" r="3.4" fill="#BFBFBF"></circle><circle cx="80.78" cy="72" r="3.4" fill="#BFBFBF"></circle><circle cx="72" cy="80.78" r="3.4" fill="#BFBFBF"></circle><circle cx="60" cy="84" r="3.4" fill="#BFBFBF"></circle><circle cx="48" cy="80.78" r="3.4" fill="#BFBFBF"></circle><circle cx="39.22" cy="72" r="3.4" fill="#BFBFBF"></circle><circle cx="36" cy="60" r="3.4" fill="#BFBFBF"></circle><circle cx="39.22" cy="48" r="3.4" fill="#BFBFBF"></circle><circle cx="48" cy="39.22" r="3.4" fill="#BFBFBF"></circle><circle cx="60" cy="48" r="3.4" fill="#FFFFFF"></circle><circle cx="70.39" cy="54" r="3.4" fill="#FFFFFF"></circle><circle cx="70.39" cy="66" r="3.4" fill="#FFFFFF"></circle><circle cx="60" cy="72" r="3.4" fill="#FFFFFF"></circle><circle cx="49.61" cy="66" r="3.4" fill="#FFFFFF"></circle><circle cx="49.61" cy="54" r="3.4" fill="#FFFFFF"></circle><circle class="center-dot" cx="60" cy="60" r="3.4" fill="#6FB7E6"></circle></svg>
+    </div>
+    <div class="header-inner">
+      <h1>McGinnis Lab — Data</h1>
+      <div class="sub">Interactive reports and supplementary data from the McGinnis Lab.</div>
+    </div>
+  </header>
+  <div class="page">
 
   <h2>Reports</h2>
   <ul class="reports">
@@ -216,5 +279,6 @@
   <footer>
     <a href="https://mcginnislab.org">mcginnislab.org</a>
   </footer>
+  </div>
 </body>
 </html>

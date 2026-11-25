@@ -2,18 +2,35 @@
 <html lang="en"><head><meta charset="utf-8">
 <title>GBM snATAC Atlas v2026-11-10 — Enhancer Candidates</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
 <style>
   *,*::before,*::after { box-sizing: border-box; }
-  :root { --sticky-head-top: 173px; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    margin: 0; padding: 0; color: #222; background: #f8f9fa; font-size: 13px; }
-  header { background:#1b1f24; color:#f8f9fa; padding:14px 24px;
-    position:sticky; top:0; z-index:50; box-shadow:0 2px 4px rgba(0,0,0,0.15); }
-  header h1 { margin:0 0 4px 0; font-size:18px; font-weight:600; }
-  header .sub { font-size:11px; opacity:0.7; }
-  header .version-badge { background:#059669; color:white; font-weight:700;
-    font-size:10px; padding:2px 8px; border-radius:4px; margin-left:10px; vertical-align:middle; }
+  :root {
+    --sticky-head-top: 173px;
+    --sans: 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --accent: #0d6efd;
+    --accent-logo: #6FB7E6;
+  }
+  body { font-family: var(--sans);
+    margin: 0; padding: 0; color: #222; background: #f8f9fa; font-size: 13px;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  header { background:#0f1217; color:#f8f9fa; padding:18px 24px 16px;
+    position:sticky; top:0; z-index:50; box-shadow:0 2px 4px rgba(0,0,0,0.2);
+    overflow: hidden; }
+  header .header-inner { position: relative; z-index: 2; max-width: 100%; padding-right: 240px; }
+  header .logo-peek { position: absolute; top: 50%; right: -180px;
+    transform: translateY(-50%); width: 420px; height: 420px;
+    pointer-events: none; z-index: 1; }
+  header .logo-peek svg { width: 100%; height: 100%; display: block; }
+  header h1 { margin:0 0 6px 0; font-size:21px; font-weight:500;
+    letter-spacing: -0.01em; font-family: var(--sans); }
+  header .sub { font-size:11px; opacity:0.72; letter-spacing: 0.01em; line-height: 1.55; }
+  header .version-badge { background:#059669; color:white; font-weight:600;
+    font-size:10px; padding:2px 8px; border-radius:4px; margin-left:10px; vertical-align:middle;
+    letter-spacing: 0.04em; }
   .tabs { background:white; padding:10px 24px; border-bottom:1px solid #dee2e6;
     display:flex; flex-wrap:wrap; gap:6px; position:sticky; top:var(--header-height, 56px); z-index:40; }
   .tab-btn { padding:6px 12px; font-size:12px; border:1px solid #ced4da; border-radius:4px;
@@ -38,7 +55,8 @@
     position: sticky !important; top: var(--sticky-head-top) !important; z-index: 45 !important;
     box-shadow: 0 2px 4px rgba(0,0,0,0.25); }
   table.dataTable thead th[title]:hover { background:#495057 !important; }
-  table.dataTable tbody td { padding:5px 8px !important; white-space:nowrap; }
+  table.dataTable tbody td { padding:5px 8px !important; white-space:nowrap;
+    font-family: ui-monospace, Menlo, 'SF Mono', monospace; font-size: 11px; }
   table.dataTable tbody tr:nth-child(even) { background:#fafbfc; }
   table.dataTable tbody tr:hover { background:#e7f1ff; }
   .num { font-family:ui-monospace, Menlo, monospace; text-align:right; }
@@ -83,11 +101,16 @@
 </style>
 </head><body>
 <header>
-  <h1>GBM snATAC Atlas v2026-11-10 — Enhancer Candidates from The Human Neurodelivery Project</h1>
-  <div class="sub">
-    67 patients × 10 cohorts × ~1.65M nuclei × 2,085,175 union peaks &nbsp;·&nbsp; Release v2026-11-10.
-    Top-1000 DISTAL peaks (|dist to TSS| ≥ 2 kb) per cell type.
-    Click row for expansion details (top-1000 per tab).
+  <div class="logo-peek" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><circle cx="60" cy="12" r="3.4" fill="#3F3F3F"></circle><circle cx="72.42" cy="13.64" r="3.4" fill="#3F3F3F"></circle><circle cx="84" cy="18.43" r="3.4" fill="#3F3F3F"></circle><circle cx="93.94" cy="26.06" r="3.4" fill="#3F3F3F"></circle><circle cx="101.57" cy="36" r="3.4" fill="#3F3F3F"></circle><circle cx="106.36" cy="47.58" r="3.4" fill="#3F3F3F"></circle><circle cx="108" cy="60" r="3.4" fill="#3F3F3F"></circle><circle cx="106.36" cy="72.42" r="3.4" fill="#3F3F3F"></circle><circle cx="101.57" cy="84" r="3.4" fill="#3F3F3F"></circle><circle cx="93.94" cy="93.94" r="3.4" fill="#3F3F3F"></circle><circle cx="84" cy="101.57" r="3.4" fill="#3F3F3F"></circle><circle cx="72.42" cy="106.36" r="3.4" fill="#3F3F3F"></circle><circle cx="60" cy="108" r="3.4" fill="#3F3F3F"></circle><circle cx="47.58" cy="106.36" r="3.4" fill="#3F3F3F"></circle><circle cx="36" cy="101.57" r="3.4" fill="#3F3F3F"></circle><circle cx="26.06" cy="93.94" r="3.4" fill="#3F3F3F"></circle><circle cx="18.43" cy="84" r="3.4" fill="#3F3F3F"></circle><circle cx="13.64" cy="72.42" r="3.4" fill="#3F3F3F"></circle><circle cx="12" cy="60" r="3.4" fill="#3F3F3F"></circle><circle cx="13.64" cy="47.58" r="3.4" fill="#3F3F3F"></circle><circle cx="18.43" cy="36" r="3.4" fill="#3F3F3F"></circle><circle cx="26.06" cy="26.06" r="3.4" fill="#3F3F3F"></circle><circle cx="36" cy="18.43" r="3.4" fill="#3F3F3F"></circle><circle cx="47.58" cy="13.64" r="3.4" fill="#3F3F3F"></circle><circle cx="60" cy="24" r="3.4" fill="#7F7F7F"></circle><circle cx="72.31" cy="26.17" r="3.4" fill="#7F7F7F"></circle><circle cx="83.14" cy="32.42" r="3.4" fill="#7F7F7F"></circle><circle cx="91.18" cy="42" r="3.4" fill="#7F7F7F"></circle><circle cx="95.45" cy="53.75" r="3.4" fill="#7F7F7F"></circle><circle cx="95.45" cy="66.25" r="3.4" fill="#7F7F7F"></circle><circle cx="91.18" cy="78" r="3.4" fill="#7F7F7F"></circle><circle cx="83.14" cy="87.58" r="3.4" fill="#7F7F7F"></circle><circle cx="72.31" cy="93.83" r="3.4" fill="#7F7F7F"></circle><circle cx="60" cy="96" r="3.4" fill="#7F7F7F"></circle><circle cx="47.69" cy="93.83" r="3.4" fill="#7F7F7F"></circle><circle cx="36.86" cy="87.58" r="3.4" fill="#7F7F7F"></circle><circle cx="28.82" cy="78" r="3.4" fill="#7F7F7F"></circle><circle cx="24.55" cy="66.25" r="3.4" fill="#7F7F7F"></circle><circle cx="24.55" cy="53.75" r="3.4" fill="#7F7F7F"></circle><circle cx="28.82" cy="42" r="3.4" fill="#7F7F7F"></circle><circle cx="36.86" cy="32.42" r="3.4" fill="#7F7F7F"></circle><circle cx="47.69" cy="26.17" r="3.4" fill="#7F7F7F"></circle><circle cx="60" cy="36" r="3.4" fill="#BFBFBF"></circle><circle cx="72" cy="39.22" r="3.4" fill="#BFBFBF"></circle><circle cx="80.78" cy="48" r="3.4" fill="#BFBFBF"></circle><circle cx="84" cy="60" r="3.4" fill="#BFBFBF"></circle><circle cx="80.78" cy="72" r="3.4" fill="#BFBFBF"></circle><circle cx="72" cy="80.78" r="3.4" fill="#BFBFBF"></circle><circle cx="60" cy="84" r="3.4" fill="#BFBFBF"></circle><circle cx="48" cy="80.78" r="3.4" fill="#BFBFBF"></circle><circle cx="39.22" cy="72" r="3.4" fill="#BFBFBF"></circle><circle cx="36" cy="60" r="3.4" fill="#BFBFBF"></circle><circle cx="39.22" cy="48" r="3.4" fill="#BFBFBF"></circle><circle cx="48" cy="39.22" r="3.4" fill="#BFBFBF"></circle><circle cx="60" cy="48" r="3.4" fill="#FFFFFF"></circle><circle cx="70.39" cy="54" r="3.4" fill="#FFFFFF"></circle><circle cx="70.39" cy="66" r="3.4" fill="#FFFFFF"></circle><circle cx="60" cy="72" r="3.4" fill="#FFFFFF"></circle><circle cx="49.61" cy="66" r="3.4" fill="#FFFFFF"></circle><circle cx="49.61" cy="54" r="3.4" fill="#FFFFFF"></circle><circle class="center-dot" cx="60" cy="60" r="3.4" fill="#6FB7E6"></circle></svg>
+  </div>
+  <div class="header-inner">
+    <h1>GBM snATAC Atlas v2026-11-10 — Enhancer Candidates from The Human Neurodelivery Project</h1>
+    <div class="sub">
+      67 patients × 10 cohorts × ~1.65M nuclei × 2,085,175 union peaks &nbsp;·&nbsp; Release v2026-11-10.
+      Top-1000 DISTAL peaks (|dist to TSS| ≥ 2 kb) per cell type.
+      Click row for expansion details (top-1000 per tab).
+    </div>
   </div>
 </header>
 
