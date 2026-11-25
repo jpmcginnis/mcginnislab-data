@@ -87,11 +87,11 @@
   .expansion .ct-bar-pair > div { min-width: 0; }
   .expansion .ct-bar-pair h4 { overflow-wrap: anywhere; }
   .expansion .mini-scatter-wrap { position:relative; }
-  .expansion .mini-plot-frame { position:relative; width:300px; height:225px;
+  .expansion .mini-plot-frame { position:relative; width:304px; height:200px;
     margin:4px 0 2px 26px; background:#fff;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .expansion .mini-plot-frame img, .expansion .mini-plot-frame canvas {
-    position:absolute; left:0; top:0; width:300px !important; height:225px !important; }
+    position:absolute; left:0; top:0; width:304px !important; height:200px !important; }
   .expansion .mini-plot-frame.loading { background:#fafbfc; }
   .expansion .mini-plot-frame.loading::after { content:"loading scatter\2026";
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -119,12 +119,12 @@
     color:#495057; letter-spacing:0.3px; margin:0; font-weight:600; }
   .ct-scatter-top .scatter-head .info { font-size:11px; color:#888; }
   .ct-scatter-top .scatter-row { display:grid;
-    grid-template-columns: minmax(540px, 808px) minmax(280px, 340px);
-    gap:28px; align-items:start; }
+    grid-template-columns: minmax(432px, 646px) minmax(280px, 340px);
+    gap:24px; align-items:start; }
   .ct-scatter-top .scatter-left { position:relative;
     padding-left:48px; box-sizing:border-box; }
   .ct-scatter-top .plot-frame { position:relative;
-    width:100%; aspect-ratio: 760 / 570;
+    width:100%; aspect-ratio: 760 / 500;
     background:#fff; margin:6px 0 2px 0;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .ct-scatter-top .plot-frame img, .ct-scatter-top .plot-frame canvas {
@@ -144,9 +144,9 @@
   .ct-scatter-top .tick.x { bottom:-16px; transform:translateX(-50%); }
   .ct-scatter-top .tick.y { left:-8px; transform:translate(-100%, 50%); }
   /* Info panel to the right of the scatter — populated on dot click */
-  .ct-scatter-top .peak-info { padding:6px 6px 0 6px; min-height:570px; }
+  .ct-scatter-top .peak-info { padding:6px 6px 0 6px; min-height:420px; }
   .ct-scatter-top .peak-info .placeholder { color:#999; font-style:italic;
-    font-size:14px; text-align:center; padding:120px 10px; }
+    font-size:14px; text-align:center; padding:90px 10px; }
   .ct-scatter-top .peak-info .peak-id { font-family:ui-monospace,'SF Mono',Menlo,monospace;
     font-size:16px; color:#1f2328; margin-bottom:4px; word-break:break-all; }
   .ct-scatter-top .peak-info .rank-line { color:#52585d; font-size:13.5px;
@@ -496,7 +496,7 @@ async function loadScatterData(ct) {
 }
 
 async function renderMiniScatter(frame, peak_id, ct) {
-  const PNG_W = 300, PNG_H = 225;
+  const PNG_W = 304, PNG_H = 200;
   try {
     const d = await loadScatterData(ct);
     frame.classList.remove('loading');
@@ -549,7 +549,7 @@ async function renderMiniScatter(frame, peak_id, ct) {
 }
 
 async function renderTopScatter(ct) {
-  const PNG_W = 760, PNG_H = 570;
+  const PNG_W = 760, PNG_H = 500;
   const container = document.getElementById('ct-scatter-top');
   const label = (typeof DISPLAY_LABEL !== 'undefined' && DISPLAY_LABEL[ct]) || ct;
   container.innerHTML = `
