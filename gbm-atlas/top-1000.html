@@ -48,6 +48,13 @@
   .caveats { background:#fff3cd; border:1px solid #ffe08a; border-radius:4px;
     padding:10px 16px; margin-bottom:16px; font-size:12px; color:#664d03; line-height:1.5; }
   .caveats strong { color:#594100; }
+  .caveats-details { margin-top:8px; }
+  .caveats-details > summary { cursor:pointer; font-weight:600; color:#594100;
+    outline:none; user-select:none; padding:2px 0; list-style:revert; display:list-item; }
+  .caveats-details > summary:hover { color:#332500; }
+  .caveats-details .caveats-body { margin-top:8px; padding-top:8px; border-top:1px dashed #d4a93d; }
+  .caveats-details .caveats-body p { margin:0 0 8px; }
+  .caveats-details .caveats-body p:last-child { margin-bottom:0; }
   table.dataTable { border-collapse: separate !important; border-spacing: 0 !important; font-size:11px; }
   table.dataTable thead th { background:#343a40 !important; color:#f8f9fa !important; padding:7px 8px !important;
     font-weight:600; font-size:10px; text-transform:uppercase; letter-spacing:0.3px;
@@ -166,29 +173,18 @@
 
 <div class="main">
   <div class="caveats">
-    <strong>Hover over any column header for its definition and formula. Click a row for further details, including UCSC link, contributing cohorts, and graphs comparing cell types.</strong>
-    <br><br>
-    <strong>Primary ranking (rank-percentile sum).</strong> Top-1000 per cell type ranked by
-    <code>primary_score = (spec_pct + strength_pct) / 2</code>, where <code>spec_pct</code> is the percentile rank of
-    <code>log2FC_top_vs_next</code> and <code>strength_pct</code> is the percentile rank of
-    <code>strength_frags_per_cell_wn</code>, both computed within distal peaks.
-    All log2FC values (vs_primary, myeloid, malignant subtypes) are computed from <code>strength_frags_per_cell_wn</code>.
-    Strength = mean over evaluable patients of <code>(fragments / cells × 500 / peak_width_bp)</code> width-normalized Tn5 fragments per cell.
-    <br><br>
-    <strong>Myeloid-tab log2FC special meaning.</strong> On the myeloid (combined) tab only, the log2FC column is redefined as
-    <code>log2( min(strength_microglia, strength_TAM) / max(strength among non-myeloid primary CTs) )</code> — i.e., how much does the
-    <em>weaker</em> of the two myeloid lines still outrun the strongest non-myeloid off-target? (All other tabs use <code>log2FC_vs_primary</code> as usual.)
-    <br><br>
-    <strong>Amplicon/CN caveat.</strong> Peaks within ±1 Mb of chr7p11.2 EGFR, chr12q15 MDM2, chr8q24 MYC, or chr9p21.3 CDKN2A carry an
-    <strong class="amp-flag">AMP</strong> badge. In NON-malignant tabs the badge flags ambient-fragment contamination.
-    In MALIGNANT tabs it flags copy-number inflation of per-cell fragment counts.
-    <br><br>
-    <strong>Nearest-gene is informational only.</strong>
-    <br><br>
-    <code>n_eval</code> is the patients with a surviving pseudobulk of that cell type (≥50 cells).
-    Rare cell types (astrocyte, GABA_neuron, T_cell, endothelial) have &lt;30 evaluable patients because fewer patients have that cell type at ≥50 cells.
-    <br><br>
+    <strong>Hover over any column header for its definition and formula. Click a row for further details, including UCSC link, contributing cohorts, and graphs comparing cell types. Nearest-gene is informational only.</strong>
+    <br>
     Details of cohorts and publications included in the atlas are available <a href="https://data.mcginnislab.org/gbm-atlas/cohorts">here</a>.
+    <details class="caveats-details">
+      <summary>Details</summary>
+      <div class="caveats-body">
+        <p><code>n_eval</code> is the patients with a surviving pseudobulk of that cell type (≥50 cells). Rare cell types (astrocyte, GABA_neuron, T_cell, endothelial) have &lt;30 evaluable patients because fewer patients have that cell type at ≥50 cells.</p>
+        <p><strong>Primary ranking (rank-percentile sum).</strong> Top-1000 per cell type ranked by <code>primary_score = (spec_pct + strength_pct) / 2</code>, where <code>spec_pct</code> is the percentile rank of <code>log2FC_top_vs_next</code> and <code>strength_pct</code> is the percentile rank of <code>strength_frags_per_cell_wn</code>, both computed within distal peaks. All log2FC values (vs_primary, myeloid, malignant subtypes) are computed from <code>strength_frags_per_cell_wn</code>. Strength = mean over evaluable patients of <code>(fragments / cells × 500 / peak_width_bp)</code> width-normalized Tn5 fragments per cell.</p>
+        <p><strong>Myeloid-tab log2FC special meaning.</strong> On the myeloid (combined) tab only, the log2FC column is redefined as <code>log2( min(strength_microglia, strength_TAM) / max(strength among non-myeloid primary CTs) )</code> — i.e., how much does the <em>weaker</em> of the two myeloid lines still outrun the strongest non-myeloid off-target? (All other tabs use <code>log2FC_vs_primary</code> as usual.)</p>
+        <p><strong>Amplicon/CN caveat.</strong> Peaks within ±1 Mb of chr7p11.2 EGFR, chr12q15 MDM2, chr8q24 MYC, or chr9p21.3 CDKN2A carry an <strong class="amp-flag">AMP</strong> badge. In NON-malignant tabs the badge flags ambient-fragment contamination. In MALIGNANT tabs it flags copy-number inflation of per-cell fragment counts.</p>
+      </div>
+    </details>
   </div>
 
   <div id="table-container">
