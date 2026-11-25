@@ -646,16 +646,14 @@ async function renderTopScatter(ct) {
           <dt>% patients detected</dt><dd>${(d.detpct[i]/10).toFixed(1)}%  <span class="aux">(${d.ndet[i]}/${d.neval[i]})</span></dd>
           <dt>nearest gene</dt><dd>${geneName}</dd>
           <dt>width</dt><dd>${d.widths[i]} bp</dd>
-          <dt>strength (%ile)</dt><dd>${(d.strpct[i]/10).toFixed(1)}</dd>
-          <dt>log2FC (%ile)</dt><dd>${(d.spec[i]/10).toFixed(1)}</dd>
-          <dt>primary score</dt><dd>${(d.prim[i]/10).toFixed(1)}</dd>
+          <dt>strength (frag/cell)</dt><dd>${d.xs[i].toFixed(4)} <span class="aux">(${(d.strpct[i]/10).toFixed(1)} %ile)</span></dd>
+          <dt>log2FC</dt><dd>${d.ys[i].toFixed(2)} <span class="aux">(${(d.spec[i]/10).toFixed(1)} %ile)</span></dd>
+          <dt>primary score</dt><dd>${(d.prim[i]/10).toFixed(1)} <span class="aux">%ile</span></dd>
         </dl>
         <div class="sep"></div>
         <dl class="dim">
           <dt>distance to TSS</dt><dd>${(d.tss[i] > 0 ? '+' : '') + fmtBp(d.tss[i])}</dd>
           <dt>type</dt><dd>${d.distal[i] ? 'distal' : 'proximal'}</dd>
-          <dt>strength (raw)</dt><dd>${d.xs[i].toFixed(5)}</dd>
-          <dt>log2FC (raw)</dt><dd>${d.ys[i].toFixed(3)}</dd>
         </dl>
       `;
     }
