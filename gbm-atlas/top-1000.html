@@ -87,11 +87,11 @@
   .expansion .ct-bar-pair > div { min-width: 0; }
   .expansion .ct-bar-pair h4 { overflow-wrap: anywhere; }
   .expansion .mini-scatter-wrap { position:relative; }
-  .expansion .mini-plot-frame { position:relative; width:300px; height:150px;
+  .expansion .mini-plot-frame { position:relative; width:300px; height:228px;
     margin:4px 0 2px 26px; background:#fff;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .expansion .mini-plot-frame img, .expansion .mini-plot-frame canvas {
-    position:absolute; left:0; top:0; width:300px !important; height:150px !important; }
+    position:absolute; left:0; top:0; width:300px !important; height:228px !important; }
   .expansion .mini-plot-frame.loading { background:#fafbfc; }
   .expansion .mini-plot-frame.loading::after { content:"loading scatter\2026";
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -119,12 +119,12 @@
     color:#495057; letter-spacing:0.3px; margin:0; font-weight:600; }
   .ct-scatter-top .scatter-head .info { font-size:11px; color:#888; }
   .ct-scatter-top .scatter-row { display:grid;
-    grid-template-columns: minmax(540px, 808px) minmax(280px, 340px);
+    grid-template-columns: minmax(420px, 548px) minmax(280px, 360px);
     gap:28px; align-items:start; }
   .ct-scatter-top .scatter-left { position:relative;
     padding-left:48px; box-sizing:border-box; }
   .ct-scatter-top .plot-frame { position:relative;
-    width:100%; aspect-ratio: 760 / 380;
+    width:100%; aspect-ratio: 500 / 380;
     background:#fff; margin:6px 0 2px 0;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .ct-scatter-top .plot-frame img, .ct-scatter-top .plot-frame canvas {
@@ -496,7 +496,7 @@ async function loadScatterData(ct) {
 }
 
 async function renderMiniScatter(frame, peak_id, ct) {
-  const PNG_W = 300, PNG_H = 150;
+  const PNG_W = 300, PNG_H = 228;
   try {
     const d = await loadScatterData(ct);
     frame.classList.remove('loading');
