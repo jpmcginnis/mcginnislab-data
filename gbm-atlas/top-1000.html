@@ -87,11 +87,11 @@
   .expansion .ct-bar-pair > div { min-width: 0; }
   .expansion .ct-bar-pair h4 { overflow-wrap: anywhere; }
   .expansion .mini-scatter-wrap { position:relative; }
-  .expansion .mini-plot-frame { position:relative; width:300px; height:150px;
+  .expansion .mini-plot-frame { position:relative; width:300px; height:225px;
     margin:4px 0 2px 26px; background:#fff;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .expansion .mini-plot-frame img, .expansion .mini-plot-frame canvas {
-    position:absolute; left:0; top:0; width:300px !important; height:150px !important; }
+    position:absolute; left:0; top:0; width:300px !important; height:225px !important; }
   .expansion .mini-plot-frame.loading { background:#fafbfc; }
   .expansion .mini-plot-frame.loading::after { content:"loading scatter\2026";
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -124,7 +124,7 @@
   .ct-scatter-top .scatter-left { position:relative;
     padding-left:48px; box-sizing:border-box; }
   .ct-scatter-top .plot-frame { position:relative;
-    width:100%; aspect-ratio: 760 / 380;
+    width:100%; aspect-ratio: 760 / 570;
     background:#fff; margin:6px 0 2px 0;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .ct-scatter-top .plot-frame img, .ct-scatter-top .plot-frame canvas {
@@ -144,26 +144,26 @@
   .ct-scatter-top .tick.x { bottom:-16px; transform:translateX(-50%); }
   .ct-scatter-top .tick.y { left:-8px; transform:translate(-100%, 50%); }
   /* Info panel to the right of the scatter — populated on dot click */
-  .ct-scatter-top .peak-info { padding:4px 4px 0 4px; min-height:380px; }
+  .ct-scatter-top .peak-info { padding:6px 6px 0 6px; min-height:570px; }
   .ct-scatter-top .peak-info .placeholder { color:#999; font-style:italic;
-    font-size:12px; text-align:center; padding:60px 10px; }
+    font-size:14px; text-align:center; padding:120px 10px; }
   .ct-scatter-top .peak-info .peak-id { font-family:ui-monospace,'SF Mono',Menlo,monospace;
-    font-size:13px; color:#1f2328; margin-bottom:3px; word-break:break-all; }
-  .ct-scatter-top .peak-info .rank-line { color:#52585d; font-size:11.5px;
-    margin-bottom:14px; }
+    font-size:16px; color:#1f2328; margin-bottom:4px; word-break:break-all; }
+  .ct-scatter-top .peak-info .rank-line { color:#52585d; font-size:13.5px;
+    margin-bottom:18px; }
   .ct-scatter-top .peak-info .rank-line strong { color:#1f2328; font-weight:600; }
   .ct-scatter-top .peak-info dl { display:grid;
-    grid-template-columns: 148px 1fr; column-gap:12px; row-gap:6px;
-    margin:0; font-size:12.5px; }
+    grid-template-columns: 170px 1fr; column-gap:14px; row-gap:9px;
+    margin:0; font-size:14.5px; }
   .ct-scatter-top .peak-info dl dt { color:#52585d; }
   .ct-scatter-top .peak-info dl dd { margin:0; color:#1f2328;
     font-variant-numeric:tabular-nums; }
-  .ct-scatter-top .peak-info dl dd .aux { color:#8a8f94; font-size:11.5px;
+  .ct-scatter-top .peak-info dl dd .aux { color:#8a8f94; font-size:13px;
     margin-left:3px; }
   .ct-scatter-top .peak-info dl.dim dt, .ct-scatter-top .peak-info dl.dim dd {
-    color:#8a8f94; font-size:11.5px; }
+    color:#8a8f94; font-size:13px; }
   .ct-scatter-top .peak-info .sep { border-top:1px solid #eef0f2;
-    margin:14px 0 12px; }
+    margin:18px 0 14px; }
   .expansion .ct-bars { display:grid; grid-template-columns:140px 1fr 60px; gap:4px 10px;
     align-items:center; font-size:10px; }
   .expansion .ct-bars .bar-cont { background:#e9ecef; height:12px; border-radius:2px; position:relative; }
@@ -251,7 +251,7 @@
 
 <div class="main">
   <div class="caveats">
-    <strong>Hover over any column header for its definition and formula. Click a row for further details, including UCSC link, contributing cohorts, and graphs comparing cell types. Nearest-gene is informational only.</strong>
+    <strong>Hover over any column header for its definition and formula. Click a row for further details, including UCSC link, contributing cohorts, and graphs comparing cell types. Nearest-gene is informational only. Filtered to peaks present in at least 60% of patients.</strong>
     <br>
     Details of cohorts and publications included in the atlas are available <a href="https://data.mcginnislab.org/gbm-atlas/cohorts">here</a>.
     <details class="caveats-details">
@@ -496,7 +496,7 @@ async function loadScatterData(ct) {
 }
 
 async function renderMiniScatter(frame, peak_id, ct) {
-  const PNG_W = 300, PNG_H = 150;
+  const PNG_W = 300, PNG_H = 225;
   try {
     const d = await loadScatterData(ct);
     frame.classList.remove('loading');
@@ -549,7 +549,7 @@ async function renderMiniScatter(frame, peak_id, ct) {
 }
 
 async function renderTopScatter(ct) {
-  const PNG_W = 760, PNG_H = 380;
+  const PNG_W = 760, PNG_H = 570;
   const container = document.getElementById('ct-scatter-top');
   const label = (typeof DISPLAY_LABEL !== 'undefined' && DISPLAY_LABEL[ct]) || ct;
   container.innerHTML = `
