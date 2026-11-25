@@ -112,23 +112,29 @@
     line-height:1.35; }
   /* Big top-of-tab scatter */
   .ct-scatter-top { background:white; border:1px solid #dee2e6; border-radius:4px;
-    padding:14px 18px 20px; margin-bottom:16px; position:relative; }
+    padding:14px 18px 20px; margin-bottom:16px; }
   .ct-scatter-top .scatter-head { display:flex; justify-content:space-between;
     align-items:baseline; margin-bottom:8px; }
   .ct-scatter-top .scatter-head h3 { font-size:11px; text-transform:uppercase;
     color:#495057; letter-spacing:0.3px; margin:0; font-weight:600; }
   .ct-scatter-top .scatter-head .info { font-size:11px; color:#888; }
+  .ct-scatter-top .scatter-row { display:grid;
+    grid-template-columns: minmax(540px, 808px) minmax(280px, 340px);
+    gap:28px; align-items:start; }
+  .ct-scatter-top .scatter-left { position:relative;
+    padding-left:48px; box-sizing:border-box; }
   .ct-scatter-top .plot-frame { position:relative;
-    width:760px; height:380px; background:#fff; margin:6px 0 2px 48px;
+    width:100%; aspect-ratio: 760 / 380;
+    background:#fff; margin:6px 0 2px 0;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .ct-scatter-top .plot-frame img, .ct-scatter-top .plot-frame canvas {
-    position:absolute; left:0; top:0; width:760px !important; height:380px !important; }
+    position:absolute; left:0; top:0; width:100% !important; height:100% !important; }
   .ct-scatter-top .plot-frame canvas { cursor:crosshair; }
   .ct-scatter-top .plot-frame.loading { background:#fafbfc; }
   .ct-scatter-top .plot-frame.loading::after { content:"loading scatter\2026";
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     color:#999; font-size:11px; }
-  .ct-scatter-top .x-label { margin:12px 0 0 48px; width:760px;
+  .ct-scatter-top .x-label { margin:12px 0 0 0; width:100%;
     text-align:center; color:#666; font-size:11px; }
   .ct-scatter-top .y-label { position:absolute; left:-4px; top:50%;
     transform:translate(-100%, -50%) rotate(-90deg); transform-origin:right center;
@@ -137,9 +143,27 @@
     font-variant-numeric:tabular-nums; }
   .ct-scatter-top .tick.x { bottom:-16px; transform:translateX(-50%); }
   .ct-scatter-top .tick.y { left:-8px; transform:translate(-100%, 50%); }
-  .ct-scatter-top .scatter-caption { font-size:11px; color:#777;
-    margin:16px 0 0 48px; max-width:760px; line-height:1.45; }
-  .ct-scatter-top .scatter-caption b { color:#495057; }
+  /* Info panel to the right of the scatter — populated on dot click */
+  .ct-scatter-top .peak-info { padding:4px 4px 0 4px; min-height:380px; }
+  .ct-scatter-top .peak-info .placeholder { color:#999; font-style:italic;
+    font-size:12px; text-align:center; padding:60px 10px; }
+  .ct-scatter-top .peak-info .peak-id { font-family:ui-monospace,'SF Mono',Menlo,monospace;
+    font-size:13px; color:#1f2328; margin-bottom:3px; word-break:break-all; }
+  .ct-scatter-top .peak-info .rank-line { color:#52585d; font-size:11.5px;
+    margin-bottom:14px; }
+  .ct-scatter-top .peak-info .rank-line strong { color:#1f2328; font-weight:600; }
+  .ct-scatter-top .peak-info dl { display:grid;
+    grid-template-columns: 148px 1fr; column-gap:12px; row-gap:6px;
+    margin:0; font-size:12.5px; }
+  .ct-scatter-top .peak-info dl dt { color:#52585d; }
+  .ct-scatter-top .peak-info dl dd { margin:0; color:#1f2328;
+    font-variant-numeric:tabular-nums; }
+  .ct-scatter-top .peak-info dl dd .aux { color:#8a8f94; font-size:11.5px;
+    margin-left:3px; }
+  .ct-scatter-top .peak-info dl.dim dt, .ct-scatter-top .peak-info dl.dim dd {
+    color:#8a8f94; font-size:11.5px; }
+  .ct-scatter-top .peak-info .sep { border-top:1px solid #eef0f2;
+    margin:14px 0 12px; }
   .expansion .ct-bars { display:grid; grid-template-columns:140px 1fr 60px; gap:4px 10px;
     align-items:center; font-size:10px; }
   .expansion .ct-bars .bar-cont { background:#e9ecef; height:12px; border-radius:2px; position:relative; }
@@ -439,6 +463,17 @@ async function loadScatterData(ct) {
     const widths = new Uint16Array(dec(B.width));
     const chromIdx = new Uint8Array(dec(B.chrom));
     const chroms = raw.chroms;
+    const geneIdx = new Uint32Array(dec(B.gene));
+    const genes = raw.genes;
+    const tss = new Int32Array(dec(B.tss));
+    const distal = new Uint8Array(dec(B.distal));
+    const spec = new Uint16Array(dec(B.spec));
+    const strpct = new Uint16Array(dec(B.strpct));
+    const detpct = new Uint16Array(dec(B.detpct));
+    const prim = new Uint16Array(dec(B.prim));
+    const ndet = new Uint16Array(dec(B.ndet));
+    const neval = new Uint16Array(dec(B.neval));
+    const rank = new Int32Array(dec(B.rank));
     const peakIdToIdx = new Map();
     for (let i=0; i<raw.n; i++) {
       const pid = chroms[chromIdx[i]] + ':' + starts[i] + '-' + (starts[i] + widths[i]);
@@ -449,7 +484,9 @@ async function loadScatterData(ct) {
     const sctx = dotSprite.getContext('2d');
     sctx.fillStyle = 'rgba(32, 38, 45, 0.42)';
     sctx.beginPath(); sctx.arc(5, 5, 2.0, 0, Math.PI*2); sctx.fill();
-    const out = { n: raw.n, n_total: raw.n_total || raw.n, xmax: raw.xmax, ymax: raw.ymax, xs, ys, peakIdToIdx, dotSprite };
+    const out = { n: raw.n, n_total: raw.n_total || raw.n, xmax: raw.xmax, ymax: raw.ymax,
+      xs, ys, starts, widths, chroms, chromIdx, genes, geneIdx, tss, distal,
+      spec, strpct, detpct, prim, ndet, neval, rank, peakIdToIdx, dotSprite };
     SCATTER_CACHE[ct] = out;
     delete SCATTER_CACHE[ct + '__loading'];
     return out;
@@ -520,16 +557,20 @@ async function renderTopScatter(ct) {
       <h3>${label} — top 10,000 peak landscape (strength × log2FC)</h3>
       <span class="info" id="scatter-info">loading…</span>
     </div>
-    <div class="plot-frame loading" id="top-frame">
-      <span class="y-label">log2 FC (vs max other lineage)</span>
-    </div>
-    <div class="x-label">strength (fragments per cell, width-normalized)</div>
-    <div class="scatter-caption">
-      <b>Background:</b> faint grey density cloud shows all peaks with log2FC &ge; 0 (not clickable).
-      <b>Dark dots:</b> top 10,000 peaks ranked by primary_score, click any to filter the table to that peak.
+    <div class="scatter-row">
+      <div class="scatter-left">
+        <div class="plot-frame loading" id="top-frame">
+          <span class="y-label">log2 FC (vs max other lineage)</span>
+        </div>
+        <div class="x-label">strength (fragments per cell, width-normalized)</div>
+      </div>
+      <div class="peak-info" id="top-peak-info">
+        <div class="placeholder">Click any dot in the scatter to see details for that peak.</div>
+      </div>
     </div>
   `;
   const frame = document.getElementById('top-frame');
+  const info = document.getElementById('top-peak-info');
   try {
     const d = await loadScatterData(ct);
     frame.classList.remove('loading');
@@ -544,7 +585,6 @@ async function renderTopScatter(ct) {
     frame.appendChild(canvas);
     const cctx = canvas.getContext('2d');
 
-    // Bigger sprite for the big scatter (dots need to be visible at 760px wide)
     const dot = document.createElement('canvas');
     dot.width = 14; dot.height = 14;
     const dctx = dot.getContext('2d');
@@ -560,44 +600,78 @@ async function renderTopScatter(ct) {
       cctx.drawImage(dot, pxArr[i]-7, pyArr[i]-7);
     }
 
-    // Build inverse peak_id lookup
-    const idxToPeakId = new Array(d.n);
-    for (const [pid, i] of d.peakIdToIdx.entries()) idxToPeakId[i] = pid;
-
-    // Ticks (skip x=0 and y=0 — they collide at the origin with the axis titles)
+    // Ticks — position as percentages so they follow when the frame resizes
     const xticks = [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5];
     xticks.forEach(v => {
       if (v > d.xmax) return;
       const el = document.createElement('div');
       el.className = 'tick x'; el.textContent = v.toFixed(2);
-      el.style.left = x2px(v) + 'px';
+      el.style.left = (v / d.xmax * 100) + '%';
       frame.appendChild(el);
     });
     const yStep = d.ymax > 10 ? 2 : (d.ymax > 4 ? 1 : 0.5);
     for (let v = yStep; v <= d.ymax + 0.001; v += yStep) {
       const el = document.createElement('div');
       el.className = 'tick y'; el.textContent = (yStep < 1) ? v.toFixed(1) : v;
-      el.style.top = y2py(v) + 'px';
+      el.style.top = (100 - v / d.ymax * 100) + '%';
       frame.appendChild(el);
     }
 
-    // Click handler: nearest-dot → filter table to that peak
+    function fmtBp(bp) {
+      if (Math.abs(bp) >= 1e6) return (bp/1e6).toFixed(2) + ' Mb';
+      if (Math.abs(bp) >= 1e3) return (bp/1e3).toFixed(1) + ' kb';
+      return bp + ' bp';
+    }
+
+    function showPeak(i) {
+      // Repaint density, then draw the highlight
+      cctx.clearRect(0, 0, PNG_W, PNG_H);
+      for (let j=0; j<d.n; j++) {
+        cctx.drawImage(dot, pxArr[j]-7, pyArr[j]-7);
+      }
+      const px = pxArr[i], py = pyArr[i];
+      const yClamped = Math.max(py, 12);
+      cctx.beginPath(); cctx.arc(px, yClamped, 8, 0, Math.PI*2);
+      cctx.strokeStyle = '#2a6df4'; cctx.lineWidth = 2.5; cctx.stroke();
+      cctx.beginPath(); cctx.arc(px, yClamped, 3, 0, Math.PI*2);
+      cctx.fillStyle = '#2a6df4'; cctx.fill();
+
+      const peakId = d.chroms[d.chromIdx[i]] + ':' + d.starts[i] + '-' + (d.starts[i] + d.widths[i]);
+      const geneName = d.genes[d.geneIdx[i]] || '—';
+      info.innerHTML = `
+        <div class="peak-id">${peakId}</div>
+        <div class="rank-line">rank by primary_score: <strong>${d.rank[i].toLocaleString()}</strong>
+          ${d.rank[i] <= 1000 ? '(in top 1,000)' : '(top 10,000)'}</div>
+        <dl>
+          <dt>% patients detected</dt><dd>${(d.detpct[i]/10).toFixed(1)}%  <span class="aux">(${d.ndet[i]}/${d.neval[i]})</span></dd>
+          <dt>nearest gene</dt><dd>${geneName}</dd>
+          <dt>width</dt><dd>${d.widths[i]} bp</dd>
+          <dt>strength (%ile)</dt><dd>${(d.strpct[i]/10).toFixed(1)}</dd>
+          <dt>log2FC (%ile)</dt><dd>${(d.spec[i]/10).toFixed(1)}</dd>
+          <dt>primary score</dt><dd>${(d.prim[i]/10).toFixed(1)}</dd>
+        </dl>
+        <div class="sep"></div>
+        <dl class="dim">
+          <dt>distance to TSS</dt><dd>${(d.tss[i] > 0 ? '+' : '') + fmtBp(d.tss[i])}</dd>
+          <dt>type</dt><dd>${d.distal[i] ? 'distal' : 'proximal'}</dd>
+          <dt>strength (raw)</dt><dd>${d.xs[i].toFixed(5)}</dd>
+          <dt>log2FC (raw)</dt><dd>${d.ys[i].toFixed(3)}</dd>
+        </dl>
+      `;
+    }
+
     canvas.addEventListener('click', ev => {
       const rect = canvas.getBoundingClientRect();
       const mx = (ev.clientX - rect.left) * (PNG_W / rect.width);
       const my = (ev.clientY - rect.top) * (PNG_H / rect.height);
-      let bestI = -1, bestD = 64;  // 8px radius
+      let bestI = -1, bestD = 100;
       for (let i=0; i<d.n; i++) {
         const dx = pxArr[i] - mx, dy = pyArr[i] - my;
         const d2 = dx*dx + dy*dy;
         if (d2 < bestD) { bestD = d2; bestI = i; }
       }
       if (bestI < 0) return;
-      const peakId = idxToPeakId[bestI];
-      if (dt) {
-        dt.search(peakId).draw();
-        document.getElementById('atlas-table').scrollIntoView({ block: 'start', behavior: 'smooth' });
-      }
+      showPeak(bestI);
     });
   } catch (e) {
     frame.classList.remove('loading');
