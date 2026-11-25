@@ -118,11 +118,11 @@
   .ct-scatter-top .scatter-head h3 { font-size:11px; text-transform:uppercase;
     color:#495057; letter-spacing:0.3px; margin:0; font-weight:600; }
   .ct-scatter-top .scatter-head .info { font-size:11px; color:#888; }
-  .ct-scatter-top .scatter-row { display:grid;
-    grid-template-columns: minmax(302px, 452px) minmax(240px, 300px);
-    gap:20px; align-items:start; }
+  .ct-scatter-top .scatter-row { display:flex;
+    gap:20px; align-items:flex-start; }
   .ct-scatter-top .scatter-left { position:relative;
-    padding-left:48px; box-sizing:border-box; }
+    padding-left:48px; box-sizing:border-box;
+    flex: 0 1 588px; min-width:393px; max-width:588px; }
   .ct-scatter-top .plot-frame { position:relative;
     width:100%; aspect-ratio: 760 / 500;
     background:#fff; margin:6px 0 2px 0;
@@ -143,8 +143,11 @@
     font-variant-numeric:tabular-nums; }
   .ct-scatter-top .tick.x { bottom:-16px; transform:translateX(-50%); }
   .ct-scatter-top .tick.y { left:-8px; transform:translate(-100%, 50%); }
-  /* Info panel to the right of the scatter — populated on dot click */
-  .ct-scatter-top .peak-info { padding:4px 4px 0 4px; min-height:300px; }
+  /* Info panel to the right of the scatter — populated on dot click.
+     Pinned right via margin-left:auto so its position stays stable regardless
+     of how the scatter column resizes. */
+  .ct-scatter-top .peak-info { padding:4px 4px 0 4px; min-height:360px;
+    flex: 0 0 340px; margin-left: auto; }
   .ct-scatter-top .peak-info .placeholder { color:#999; font-style:italic;
     font-size:12px; text-align:center; padding:60px 10px; }
   .ct-scatter-top .peak-info .peak-id { font-family:ui-monospace,'SF Mono',Menlo,monospace;
