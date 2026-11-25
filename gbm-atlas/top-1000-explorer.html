@@ -87,11 +87,11 @@
   .expansion .ct-bar-pair > div { min-width: 0; }
   .expansion .ct-bar-pair h4 { overflow-wrap: anywhere; }
   .expansion .mini-scatter-wrap { position:relative; }
-  .expansion .mini-plot-frame { position:relative; width:300px; height:260px;
-    margin:4px 0 2px 22px; background:#fff;
+  .expansion .mini-plot-frame { position:relative; width:300px; height:170px;
+    margin:4px 0 2px 26px; background:#fff;
     border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
   .expansion .mini-plot-frame img, .expansion .mini-plot-frame canvas {
-    position:absolute; left:0; top:0; width:300px !important; height:260px !important; }
+    position:absolute; left:0; top:0; width:300px !important; height:170px !important; }
   .expansion .mini-plot-frame.loading { background:#fafbfc; }
   .expansion .mini-plot-frame.loading::after { content:"loading scatter\2026";
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
@@ -99,16 +99,47 @@
   .expansion .mini-plot-frame.unavailable::after { content:"(no scatter data for this peak)";
     position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
     color:#999; font-size:10.5px; }
-  .expansion .mini-x-lab { margin:6px 0 0 22px; width:300px; text-align:center;
+  .expansion .mini-x-lab { margin:18px 0 0 26px; width:300px; text-align:center;
     color:#666; font-size:10.5px; }
-  .expansion .mini-y-lab { position:absolute; left:8px; top:50%;
+  .expansion .mini-y-lab { position:absolute; left:4px; top:50%;
     transform:translate(-100%, -50%) rotate(-90deg); transform-origin:right center;
     color:#666; font-size:10.5px; white-space:nowrap; }
-  .expansion .mini-tick { position:absolute; color:#999; font-size:9.5px;
+  .expansion .mini-tick { position:absolute; color:#999; font-size:9px;
     font-variant-numeric:tabular-nums; }
-  .expansion .mini-tick.x { bottom:-14px; transform:translateX(-50%); }
-  .expansion .mini-tick.y { left:-6px; transform:translate(-100%, 50%); }
-  .expansion .scatter-caption { font-size:10.5px; color:#777; margin-top:14px; line-height:1.4; }
+  .expansion .mini-tick.x { bottom:-13px; transform:translateX(-50%); }
+  .expansion .mini-tick.y { left:-4px; transform:translate(-100%, 50%); }
+  .expansion .scatter-caption { font-size:10.5px; color:#777; margin-top:10px;
+    line-height:1.35; }
+  /* Big top-of-tab scatter */
+  .ct-scatter-top { background:white; border:1px solid #dee2e6; border-radius:4px;
+    padding:14px 18px 20px; margin-bottom:16px; position:relative; }
+  .ct-scatter-top .scatter-head { display:flex; justify-content:space-between;
+    align-items:baseline; margin-bottom:8px; }
+  .ct-scatter-top .scatter-head h3 { font-size:11px; text-transform:uppercase;
+    color:#495057; letter-spacing:0.3px; margin:0; font-weight:600; }
+  .ct-scatter-top .scatter-head .info { font-size:11px; color:#888; }
+  .ct-scatter-top .plot-frame { position:relative;
+    width:760px; height:380px; background:#fff; margin:6px 0 2px 48px;
+    border-left:1px solid #c9ced3; border-bottom:1px solid #c9ced3; }
+  .ct-scatter-top .plot-frame img, .ct-scatter-top .plot-frame canvas {
+    position:absolute; left:0; top:0; width:760px !important; height:380px !important; }
+  .ct-scatter-top .plot-frame canvas { cursor:crosshair; }
+  .ct-scatter-top .plot-frame.loading { background:#fafbfc; }
+  .ct-scatter-top .plot-frame.loading::after { content:"loading scatter\2026";
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    color:#999; font-size:11px; }
+  .ct-scatter-top .x-label { margin:12px 0 0 48px; width:760px;
+    text-align:center; color:#666; font-size:11px; }
+  .ct-scatter-top .y-label { position:absolute; left:-4px; top:50%;
+    transform:translate(-100%, -50%) rotate(-90deg); transform-origin:right center;
+    color:#666; font-size:11px; white-space:nowrap; }
+  .ct-scatter-top .tick { position:absolute; color:#888; font-size:10px;
+    font-variant-numeric:tabular-nums; }
+  .ct-scatter-top .tick.x { bottom:-16px; transform:translateX(-50%); }
+  .ct-scatter-top .tick.y { left:-8px; transform:translate(-100%, 50%); }
+  .ct-scatter-top .scatter-caption { font-size:11px; color:#777;
+    margin:16px 0 0 48px; max-width:760px; line-height:1.45; }
+  .ct-scatter-top .scatter-caption b { color:#495057; }
   .expansion .ct-bars { display:grid; grid-template-columns:140px 1fr 60px; gap:4px 10px;
     align-items:center; font-size:10px; }
   .expansion .ct-bars .bar-cont { background:#e9ecef; height:12px; border-radius:2px; position:relative; }
@@ -209,6 +240,8 @@
       </div>
     </details>
   </div>
+
+  <div class="ct-scatter-top" id="ct-scatter-top"></div>
 
   <div id="table-container">
     <table id="atlas-table" class="display compact" style="width:100%">
@@ -416,7 +449,7 @@ async function loadScatterData(ct) {
     const sctx = dotSprite.getContext('2d');
     sctx.fillStyle = 'rgba(32, 38, 45, 0.42)';
     sctx.beginPath(); sctx.arc(5, 5, 2.0, 0, Math.PI*2); sctx.fill();
-    const out = { n: raw.n, xmax: raw.xmax, ymax: raw.ymax, xs, ys, peakIdToIdx, dotSprite };
+    const out = { n: raw.n, n_total: raw.n_total || raw.n, xmax: raw.xmax, ymax: raw.ymax, xs, ys, peakIdToIdx, dotSprite };
     SCATTER_CACHE[ct] = out;
     delete SCATTER_CACHE[ct + '__loading'];
     return out;
@@ -426,7 +459,7 @@ async function loadScatterData(ct) {
 }
 
 async function renderMiniScatter(frame, peak_id, ct) {
-  const PNG_W = 300, PNG_H = 260;
+  const PNG_W = 300, PNG_H = 218;
   try {
     const d = await loadScatterData(ct);
     frame.classList.remove('loading');
@@ -438,19 +471,25 @@ async function renderMiniScatter(frame, peak_id, ct) {
     frame.appendChild(canvas);
     const cctx = canvas.getContext('2d');
     const x2px = v => (v / d.xmax) * PNG_W;
-    const y2py = v => PNG_H - (v / d.ymax) * PNG_H;
+    const y2py = v => PNG_H - (Math.min(v, d.ymax) / d.ymax) * PNG_H;
     for (let i=0; i<d.n; i++) {
       cctx.drawImage(d.dotSprite, x2px(d.xs[i]) - 5, y2py(d.ys[i]) - 5);
     }
     const idx = d.peakIdToIdx.get(peak_id);
     if (idx !== undefined) {
       const px = x2px(d.xs[idx]), py = y2py(d.ys[idx]);
-      cctx.beginPath(); cctx.arc(px, py, 6, 0, Math.PI*2);
+      const overflow = d.ys[idx] > d.ymax;
+      cctx.beginPath(); cctx.arc(px, Math.max(py, 8), 6, 0, Math.PI*2);
       cctx.strokeStyle = '#2a6df4'; cctx.lineWidth = 2; cctx.stroke();
-      cctx.beginPath(); cctx.arc(px, py, 2.3, 0, Math.PI*2);
+      cctx.beginPath(); cctx.arc(px, Math.max(py, 8), 2.3, 0, Math.PI*2);
       cctx.fillStyle = '#2a6df4'; cctx.fill();
+      if (overflow) {
+        cctx.fillStyle = '#2a6df4'; cctx.font = 'bold 9px sans-serif';
+        cctx.textAlign = 'center';
+        cctx.fillText('▲ ' + d.ys[idx].toFixed(1), px, 20);
+      }
     }
-    const xticks = [0, 0.1, 0.2, 0.3, 0.4, 0.5];
+    const xticks = [0.1, 0.2, 0.3, 0.4, 0.5];
     xticks.forEach(v => {
       if (v > d.xmax) return;
       const el = document.createElement('div');
@@ -458,16 +497,111 @@ async function renderMiniScatter(frame, peak_id, ct) {
       el.style.left = x2px(v) + 'px';
       frame.appendChild(el);
     });
-    const step = d.ymax > 6 ? 2 : 1;
-    for (let v = 0; v <= d.ymax; v += step) {
+    const yStep = d.ymax > 10 ? 2 : (d.ymax > 4 ? 1 : 0.5);
+    for (let v = yStep; v <= d.ymax + 0.001; v += yStep) {
       const el = document.createElement('div');
-      el.className = 'mini-tick y'; el.textContent = v;
+      el.className = 'mini-tick y';
+      el.textContent = (yStep < 1) ? v.toFixed(1) : v;
       el.style.top = y2py(v) + 'px';
       frame.appendChild(el);
     }
   } catch (e) {
     frame.classList.remove('loading');
     frame.classList.add('unavailable');
+  }
+}
+
+async function renderTopScatter(ct) {
+  const PNG_W = 760, PNG_H = 380;
+  const container = document.getElementById('ct-scatter-top');
+  const label = (typeof DISPLAY_LABEL !== 'undefined' && DISPLAY_LABEL[ct]) || ct;
+  container.innerHTML = `
+    <div class="scatter-head">
+      <h3>${label} — top 10,000 peak landscape (strength × log2FC)</h3>
+      <span class="info" id="scatter-info">loading…</span>
+    </div>
+    <div class="plot-frame loading" id="top-frame">
+      <span class="y-label">log2 FC (vs max other lineage)</span>
+    </div>
+    <div class="x-label">strength (fragments per cell, width-normalized)</div>
+    <div class="scatter-caption">
+      <b>Background:</b> faint grey density cloud shows all peaks with log2FC &ge; 0 (not clickable).
+      <b>Dark dots:</b> top 10,000 peaks ranked by primary_score, click any to filter the table to that peak.
+    </div>
+  `;
+  const frame = document.getElementById('top-frame');
+  try {
+    const d = await loadScatterData(ct);
+    frame.classList.remove('loading');
+    document.getElementById('scatter-info').textContent =
+      d.n.toLocaleString() + ' interactive dots over ' + d.n_total.toLocaleString() + '-peak density background';
+
+    const img = document.createElement('img');
+    img.src = `./scatter-data/${ct}_bg.png`; img.alt = 'density background'; img.draggable = false;
+    const canvas = document.createElement('canvas');
+    canvas.width = PNG_W; canvas.height = PNG_H;
+    frame.appendChild(img);
+    frame.appendChild(canvas);
+    const cctx = canvas.getContext('2d');
+
+    // Bigger sprite for the big scatter (dots need to be visible at 760px wide)
+    const dot = document.createElement('canvas');
+    dot.width = 14; dot.height = 14;
+    const dctx = dot.getContext('2d');
+    dctx.fillStyle = 'rgba(32, 38, 45, 0.44)';
+    dctx.beginPath(); dctx.arc(7, 7, 2.8, 0, Math.PI*2); dctx.fill();
+
+    const x2px = v => (v / d.xmax) * PNG_W;
+    const y2py = v => PNG_H - (Math.min(v, d.ymax) / d.ymax) * PNG_H;
+    const pxArr = new Float32Array(d.n), pyArr = new Float32Array(d.n);
+    for (let i=0; i<d.n; i++) {
+      pxArr[i] = x2px(d.xs[i]);
+      pyArr[i] = y2py(d.ys[i]);
+      cctx.drawImage(dot, pxArr[i]-7, pyArr[i]-7);
+    }
+
+    // Build inverse peak_id lookup
+    const idxToPeakId = new Array(d.n);
+    for (const [pid, i] of d.peakIdToIdx.entries()) idxToPeakId[i] = pid;
+
+    // Ticks (skip x=0 and y=0 — they collide at the origin with the axis titles)
+    const xticks = [0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5];
+    xticks.forEach(v => {
+      if (v > d.xmax) return;
+      const el = document.createElement('div');
+      el.className = 'tick x'; el.textContent = v.toFixed(2);
+      el.style.left = x2px(v) + 'px';
+      frame.appendChild(el);
+    });
+    const yStep = d.ymax > 10 ? 2 : (d.ymax > 4 ? 1 : 0.5);
+    for (let v = yStep; v <= d.ymax + 0.001; v += yStep) {
+      const el = document.createElement('div');
+      el.className = 'tick y'; el.textContent = (yStep < 1) ? v.toFixed(1) : v;
+      el.style.top = y2py(v) + 'px';
+      frame.appendChild(el);
+    }
+
+    // Click handler: nearest-dot → filter table to that peak
+    canvas.addEventListener('click', ev => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = (ev.clientX - rect.left) * (PNG_W / rect.width);
+      const my = (ev.clientY - rect.top) * (PNG_H / rect.height);
+      let bestI = -1, bestD = 64;  // 8px radius
+      for (let i=0; i<d.n; i++) {
+        const dx = pxArr[i] - mx, dy = pyArr[i] - my;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < bestD) { bestD = d2; bestI = i; }
+      }
+      if (bestI < 0) return;
+      const peakId = idxToPeakId[bestI];
+      if (dt) {
+        dt.search(peakId).draw();
+        document.getElementById('atlas-table').scrollIntoView({ block: 'start', behavior: 'smooth' });
+      }
+    });
+  } catch (e) {
+    frame.classList.remove('loading');
+    document.getElementById('scatter-info').textContent = '(scatter not available)';
   }
 }
 
@@ -527,6 +661,7 @@ function renderTab(ct) {
   });
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelector(`.tab-btn[data-ct="${ct}"]`).classList.add('active');
+  renderTopScatter(ct);
 }
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
