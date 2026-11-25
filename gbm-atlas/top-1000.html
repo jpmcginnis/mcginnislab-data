@@ -145,28 +145,30 @@
   .ct-scatter-top .tick.y { left:-8px; transform:translate(-100%, 50%); }
   /* Info panel to the right of the scatter — populated on dot click.
      Pinned right via margin-left:auto so its position stays stable regardless
-     of how the scatter column resizes. */
+     of how the scatter column resizes. Font ~1.7× the compact baseline + weight
+     bumped to 500 for a slight extra weight. */
   .ct-scatter-top .peak-info { padding:4px 4px 0 4px; min-height:360px;
-    flex: 0 0 340px; margin-left: auto; margin-right: 140px; }
+    flex: 0 0 500px; margin-left: auto; margin-right: 140px; font-weight: 500; }
   .ct-scatter-top .peak-info .placeholder { color:#999; font-style:italic;
-    font-size:12px; text-align:center; padding:60px 10px; }
+    font-size:20px; text-align:center; padding:100px 10px; font-weight:400; }
   .ct-scatter-top .peak-info .peak-id { font-family:ui-monospace,'SF Mono',Menlo,monospace;
-    font-size:13px; color:#1f2328; margin-bottom:3px; word-break:break-all; }
-  .ct-scatter-top .peak-info .rank-line { color:#52585d; font-size:11.5px;
-    margin-bottom:12px; }
+    font-size:22px; color:#1f2328; margin-bottom:6px; word-break:break-all;
+    font-weight:500; }
+  .ct-scatter-top .peak-info .rank-line { color:#52585d; font-size:19px;
+    margin-bottom:18px; }
   .ct-scatter-top .peak-info .rank-line strong { color:#1f2328; font-weight:600; }
   .ct-scatter-top .peak-info dl { display:grid;
-    grid-template-columns: 140px 1fr; column-gap:10px; row-gap:6px;
-    margin:0; font-size:12px; }
+    grid-template-columns: 240px 1fr; column-gap:14px; row-gap:10px;
+    margin:0; font-size:20px; }
   .ct-scatter-top .peak-info dl dt { color:#52585d; }
   .ct-scatter-top .peak-info dl dd { margin:0; color:#1f2328;
     font-variant-numeric:tabular-nums; }
-  .ct-scatter-top .peak-info dl dd .aux { color:#8a8f94; font-size:11px;
-    margin-left:3px; }
+  .ct-scatter-top .peak-info dl dd .aux { color:#8a8f94; font-size:18px;
+    margin-left:4px; font-weight:400; }
   .ct-scatter-top .peak-info dl.dim dt, .ct-scatter-top .peak-info dl.dim dd {
-    color:#8a8f94; font-size:11px; }
+    color:#8a8f94; font-size:18px; font-weight:400; }
   .ct-scatter-top .peak-info .sep { border-top:1px solid #eef0f2;
-    margin:12px 0 10px; }
+    margin:18px 0 14px; }
   .expansion .ct-bars { display:grid; grid-template-columns:140px 1fr 60px; gap:4px 10px;
     align-items:center; font-size:10px; }
   .expansion .ct-bars .bar-cont { background:#e9ecef; height:12px; border-radius:2px; position:relative; }
