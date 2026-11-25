@@ -640,8 +640,6 @@ async function renderTopScatter(ct) {
       const geneName = d.genes[d.geneIdx[i]] || '—';
       info.innerHTML = `
         <div class="peak-id">${peakId}</div>
-        <div class="rank-line">rank by primary_score: <strong>${d.rank[i].toLocaleString()}</strong>
-          ${d.rank[i] <= 1000 ? '(in top 1,000)' : '(top 10,000)'}</div>
         <dl>
           <dt>% patients detected</dt><dd>${(d.detpct[i]/10).toFixed(1)}%  <span class="aux">(${d.ndet[i]}/${d.neval[i]})</span></dd>
           <dt>nearest gene</dt><dd>${geneName}</dd>
