@@ -5,64 +5,45 @@
 <title>NB atlas cohorts — snapshot 2026-11-26</title>
 <style>
   :root {
-    --navy: #1b3b6f;
-    --navy-ink: #0e2548;
-    --sky: #4e8fd1;
-    --sky-tint: #e5eff8;
-    --grey-100: #f6f7f9;
-    --grey-200: #e7eaef;
-    --grey-400: #aab2bd;
-    --grey-700: #4a5260;
-    --ink: #1a1a1a;
-    --warn: #c6570f;
+    --navy:#1b3b6f; --navy-ink:#0e2548; --sky:#4e8fd1; --sky-tint:#e5eff8;
+    --grey-100:#f6f7f9; --grey-200:#e7eaef; --grey-400:#aab2bd; --grey-700:#4a5260;
+    --ink:#1a1a1a; --warn:#c6570f;
   }
-  html, body {
-    background: #fff;
-    color: var(--ink);
-    font: 14px/1.45 -apple-system, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
-    margin: 0;
-    padding: 24px 32px 48px;
-  }
-  h1 { font-size: 22px; color: var(--navy-ink); margin: 0 0 4px; font-weight: 600; }
-  h2 {
-    font-size: 15px; color: var(--navy); margin: 28px 0 10px;
-    padding-bottom: 5px; border-bottom: 1.5px solid var(--navy);
-    font-weight: 600; letter-spacing: 0.3px; text-transform: uppercase;
-  }
-  .subtitle { color: var(--grey-700); font-size: 13px; margin-bottom: 16px; }
-  .summary {
-    background: var(--sky-tint); border-left: 3px solid var(--sky);
-    padding: 10px 14px; margin: 12px 0 8px; font-size: 13px; color: var(--navy-ink);
-  }
-  .summary b { color: var(--navy-ink); }
-  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
-  th {
-    background: var(--grey-100); color: var(--navy-ink); text-align: left;
-    padding: 7px 8px; border-bottom: 1.5px solid var(--navy);
-    font-weight: 600; white-space: nowrap;
-  }
-  td { padding: 6px 8px; border-bottom: 1px solid var(--grey-200); vertical-align: top; }
-  tbody tr:hover td { background: #fafbfc; }
-  td.cohort { font-family: "SF Mono","Menlo","Monaco",monospace; font-size: 11.5px; white-space: nowrap; color: var(--navy-ink); }
-  td.access { font-size: 11.5px; white-space: nowrap; }
-  td.access a { color: var(--sky); text-decoration: none; display: inline-block; padding: 1px 0; }
-  td.access a:hover { text-decoration: underline; color: var(--navy); }
-  td.n { font-variant-numeric: tabular-nums; white-space: nowrap; }
-  td.n b { color: var(--navy-ink); }
-  td.n .pend { color: var(--warn); font-size: 11px; }
-  td.track { font-size: 11px; color: var(--grey-700); white-space: nowrap; }
-  td.journal { font-size: 11.5px; color: var(--grey-700); }
-  td.journal a { color: var(--sky); text-decoration: none; }
-  td.journal a:hover { text-decoration: underline; }
-  .pmid { font-size: 10.5px; }
-  td.note { color: var(--grey-700); font-size: 11.5px; max-width: 320px; }
-  tr.held td { background: #fdf8f0; }
-  tr.held td.cohort { color: var(--warn); }
-  footer {
-    margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--grey-200);
-    color: var(--grey-700); font-size: 11.5px;
-  }
-  footer code { background: var(--grey-100); padding: 1px 4px; border-radius: 2px; }
+  html,body { background:#fff; color:var(--ink);
+    font:14px/1.45 -apple-system,"SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif;
+    margin:0; padding:24px 32px 48px; }
+  h1 { font-size:22px; color:var(--navy-ink); margin:0 0 4px; font-weight:600; }
+  h2 { font-size:15px; color:var(--navy); margin:28px 0 10px;
+    padding-bottom:5px; border-bottom:1.5px solid var(--navy);
+    font-weight:600; letter-spacing:0.3px; text-transform:uppercase; }
+  .subtitle { color:var(--grey-700); font-size:13px; margin-bottom:16px; }
+  .summary { background:var(--sky-tint); border-left:3px solid var(--sky);
+    padding:10px 14px; margin:12px 0 8px; font-size:13px; color:var(--navy-ink); }
+  .summary b { color:var(--navy-ink); }
+  table { width:100%; border-collapse:collapse; font-size:12.5px; margin-top:6px; }
+  th { background:var(--grey-100); color:var(--navy-ink); text-align:left;
+    padding:7px 8px; border-bottom:1.5px solid var(--navy);
+    font-weight:600; white-space:nowrap; }
+  td { padding:6px 8px; border-bottom:1px solid var(--grey-200); vertical-align:top; }
+  tbody tr:hover td { background:#fafbfc; }
+  td.cohort { font-family:"SF Mono","Menlo","Monaco",monospace; font-size:11.5px; white-space:nowrap; color:var(--navy-ink); }
+  td.access { font-size:11.5px; white-space:nowrap; }
+  td.access a { color:var(--sky); text-decoration:none; display:inline-block; padding:1px 0; }
+  td.access a:hover { text-decoration:underline; color:var(--navy); }
+  td.n { font-variant-numeric:tabular-nums; white-space:nowrap; }
+  td.n b { color:var(--navy-ink); }
+  td.n .pend { color:var(--warn); font-size:11px; }
+  td.track { font-size:11px; color:var(--grey-700); white-space:nowrap; }
+  td.journal { font-size:11.5px; color:var(--grey-700); }
+  td.journal a { color:var(--sky); text-decoration:none; }
+  td.journal a:hover { text-decoration:underline; }
+  .pmid { font-size:10.5px; }
+  td.note { color:var(--grey-700); font-size:11.5px; max-width:320px; }
+  tr.held td { background:#fdf8f0; }
+  tr.held td.cohort { color:var(--warn); }
+  footer { margin-top:32px; padding-top:12px; border-top:1px solid var(--grey-200);
+    color:var(--grey-700); font-size:11.5px; }
+  footer code { background:var(--grey-100); padding:1px 4px; border-radius:2px; }
 </style>
 </head>
 <body>
@@ -87,13 +68,13 @@
 <tr>
   <th>Cohort</th>
   <th>Data accession</th>
+  <th>Journal · PMID</th>
   <th>Author · year</th>
   <th>Tissue</th>
   <th>Modality</th>
   <th>Disease context</th>
   <th>YES / total</th>
   <th>Track</th>
-  <th>Journal · PMID</th>
   <th>Notes</th>
 </tr>
 </thead>
@@ -101,349 +82,349 @@
 <tr class="">
   <td class="cohort">4dn-hippocampus</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE278576" target="_blank">GEO · GSE278576</a><br><a href="https://data.4dnucleome.org/experiment-set-replicates/4DNES4I8MG4T/" target="_blank">4DN · 4DNES4I8MG4T</a></td>
+  <td class="journal">Science 393<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/42490474/" target="_blank">42490474</a></span></td>
   <td>Ren 2026</td>
   <td>hippocampus</td>
   <td>snATAC + snm3C</td>
   <td>Normal hippocampus (aging)</td>
   <td class="n"><b>20</b> / 20</td>
   <td class="track">main</td>
-  <td class="journal">Science 393<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/42490474/" target="_blank">42490474</a></span></td>
   <td class="note">GEO has processed 10x h5 per donor + ATAC/RNA bigwigs</td>
 </tr>
 <tr class="">
   <td class="cohort">cxg-2-veiga-adolescent-atac</td>
   <td class="access"><a href="https://explore.data.humancellatlas.org/projects/984ce0a2-682d-47a3-b80e-1354dfe51ca3" target="_blank">HCA · 984ce0a2</a><br><a href="https://cellxgene.cziscience.com/collections/48259aa8-f168-4bf5-b797-af8e88da6637" target="_blank">CELLxGENE · 835fa5c4</a></td>
+  <td class="journal">bioRxiv<br><span class="pmid">PMID —</span></td>
   <td>Veiga 2026</td>
   <td>cortex (pediatric surgical)</td>
   <td>10x multiome (snATAC + snRNA paired)</td>
   <td>Pediatric epilepsy (surgical, histologically normal)</td>
   <td class="n"><b>5</b> / 5</td>
   <td class="track">main</td>
-  <td class="journal">bioRxiv<br><span class="pmid">PMID —</span></td>
   <td class="note">ATAC companion for the RNA-only cxg-2-veiga-adolescent cohort. 5 ATAC donors (G168, G249, G228, G243, G206); one frontal-lobe donor (G133) dropped from ATAC. Belongs to epilep…</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE147672</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE147672" target="_blank">GEO · GSE147672</a></td>
+  <td class="journal">Nat Genet 52<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/33106633/" target="_blank">33106633</a></span></td>
   <td>Montine 2020</td>
   <td>7 brain regions (incl. caudate + hippocampus)</td>
   <td>snATAC</td>
   <td>Normal / healthy</td>
   <td class="n"><b>8</b> / 10</td>
   <td class="track">main</td>
-  <td class="journal">Nat Genet 52<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/33106633/" target="_blank">33106633</a></span></td>
   <td class="note">70,631 cells, 6 regions. Also used in Pratt 2024 Sci Adv PMID 38781344</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE174367</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE174367" target="_blank">GEO · GSE174367</a></td>
+  <td class="journal">Nat Genet 53<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/34239132/" target="_blank">34239132</a></span></td>
   <td>Swarup 2021</td>
   <td>prefrontal cortex</td>
   <td>snMultiome</td>
   <td>Alzheimer&#x27;s (AD vs control)</td>
   <td class="n"><b>8</b> / 21</td>
   <td class="track">main</td>
-  <td class="journal">Nat Genet 53<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/34239132/" target="_blank">34239132</a></span></td>
   <td class="note">DISEASE-CONTAINING: late-stage AD + controls (191,890 nuclei total — filter to controls only)</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE178451</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE178451" target="_blank">GEO · GSE178451</a></td>
+  <td class="journal">Cell Rep 38<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/35263594/" target="_blank">35263594</a></span></td>
   <td>Ruf-Zamojski 2022</td>
   <td>pituitary (postmortem)</td>
   <td>snMultiome</td>
   <td>Normal / healthy</td>
   <td class="n"><b>7</b> / 7</td>
   <td class="track">main</td>
-  <td class="journal">Cell Rep 38<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/35263594/" target="_blank">35263594</a></span></td>
   <td class="note">non-brain — pituitary is in scope per prior decisions</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE193688</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE193688" target="_blank">GEO · GSE193688</a></td>
+  <td class="journal">Nat Aging 4<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/38491288/" target="_blank">38491288</a></span></td>
   <td>Kim 2024</td>
   <td>midbrain</td>
   <td>snMultiome</td>
   <td>Parkinson&#x27;s (vs control)</td>
   <td class="n"><b>19</b> / 34</td>
   <td class="track">main</td>
-  <td class="journal">Nat Aging 4<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/38491288/" target="_blank">38491288</a></span></td>
   <td class="note">DISEASE-CONTAINING: young + aged + PD donors — filter to controls only</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE207334</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE207334" target="_blank">GEO · GSE207334</a></td>
+  <td class="journal">Science 377<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/36007006/" target="_blank">36007006</a></span></td>
   <td>Sestan 2022</td>
   <td>DLPFC</td>
   <td>snMultiome</td>
   <td>Normal / healthy</td>
   <td class="n"><b>5</b> / 5</td>
   <td class="track">main</td>
-  <td class="journal">Science 377<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/36007006/" target="_blank">36007006</a></span></td>
   <td class="note">multi-species paper — ensure non-human samples excluded</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE212630</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE212630" target="_blank">GEO · GSE212630</a></td>
+  <td class="journal">PNAS 122<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39999167/" target="_blank">39999167</a></span></td>
   <td>McEachin 2025</td>
   <td>DLPFC</td>
   <td>snMultiome</td>
   <td>ALS (vs control)</td>
   <td class="n"><b>7</b> / 26</td>
   <td class="track">main</td>
-  <td class="journal">PNAS 122<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39999167/" target="_blank">39999167</a></span></td>
   <td class="note">DISEASE-CONTAINING: C9orf72 ALS/FTD + controls (filter to controls only)</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE214979</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE214979" target="_blank">GEO · GSE214979</a></td>
+  <td class="journal">Cell Genom 3<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/36950385/" target="_blank">36950385</a></span></td>
   <td>Rizzardi 2023</td>
   <td>DLPFC</td>
   <td>snMultiome</td>
   <td>AD vs matched controls</td>
   <td class="n"><b>8</b> / 18</td>
   <td class="track">main</td>
-  <td class="journal">Cell Genom 3<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/36950385/" target="_blank">36950385</a></span></td>
   <td class="note">7 late-stage AD donors (EXCLUDE per policy); 8 matched controls retained as ad_control</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE246443</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE246443" target="_blank">GEO · GSE246443</a></td>
+  <td class="journal">Nat Genet 57<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/40764843/" target="_blank">40764843</a></span></td>
   <td>Chawla 2025</td>
   <td>BA9 DLPFC</td>
   <td>snATAC</td>
   <td>MDD / suicide (vs control)</td>
   <td class="n"><b>21</b> / 42</td>
   <td class="track">main</td>
-  <td class="journal">Nat Genet 57<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/40764843/" target="_blank">40764843</a></span></td>
   <td class="note">DISEASE-CONTAINING: 40 controls + 44 MDD suicide cases — filter to 40 controls only</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE256207</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE256207" target="_blank">GEO · GSE256207</a></td>
+  <td class="journal">Sci Adv 11<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/40053590/" target="_blank">40053590</a></span></td>
   <td>Gerstner 2025</td>
   <td>orbitofrontal cortex BA11</td>
   <td>snATAC</td>
   <td>Psychiatric (SZ/BPD/MDD/SZA vs control)</td>
   <td class="n"><b>35</b> / 90</td>
   <td class="track">main</td>
-  <td class="journal">Sci Adv 11<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/40053590/" target="_blank">40053590</a></span></td>
   <td class="note">DISEASE-CONTAINING: 35 healthy + 57 psychiatric — filter to 35 healthy controls only</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE259298</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE259298" target="_blank">GEO · GSE259298</a></td>
+  <td class="journal">Sci Adv 11<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41223260/" target="_blank">41223260</a></span></td>
   <td>Swarup 2025</td>
   <td>prefrontal cortex</td>
   <td>snMultiome</td>
   <td>Pick&#x27;s / FTD (vs control)</td>
   <td class="n"><b>9</b> / 16</td>
   <td class="track">main</td>
-  <td class="journal">Sci Adv 11<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41223260/" target="_blank">41223260</a></span></td>
   <td class="note">7 Pick&#x27;s disease patients EXCLUDE; 9 matched controls retained as ad_control</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE266303</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE266303" target="_blank">GEO · GSE266303</a></td>
+  <td class="journal">iScience 27<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39640563/" target="_blank">39640563</a></span></td>
   <td>Galvão 2024</td>
   <td>cortex (surgical epilepsy)</td>
   <td>snATAC (matrix)</td>
   <td>Epilepsy surgical margin</td>
   <td class="n"><b>4</b> / 4</td>
   <td class="track">main</td>
-  <td class="journal">iScience 27<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39640563/" target="_blank">39640563</a></span></td>
   <td class="note">UNICAMP (Brazil). FCD type II (not IIIa as earlier note suggested). 61,525 cells from 11 clinical samples (lesion + control).</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE277313</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE277313" target="_blank">GEO · GSE277313</a></td>
+  <td class="journal">Nat Commun 16<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41083468/" target="_blank">41083468</a></span></td>
   <td>Liu 2025</td>
   <td>caudate nucleus</td>
   <td>snMultiome</td>
   <td>AUD (vs control)</td>
   <td class="n"><b>80</b> / 161</td>
   <td class="track">main</td>
-  <td class="journal">Nat Commun 16<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41083468/" target="_blank">41083468</a></span></td>
   <td class="note">preprint PMID 39149227 (bioRxiv 10.1101/2024.08.02.606355). RDS per-pool, ingest never succeeded — CATLAS fallback only GEO contains 161 unique BTRC donor IDs (confirmed 1:1 a…</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE288939</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE288939" target="_blank">GEO · GSE288939</a></td>
+  <td class="journal">Nature 657<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/42557314/" target="_blank">42557314</a></span></td>
   <td>Konopka 2026</td>
   <td>temporal + premotor cortex (surgical)</td>
   <td>snMultiome</td>
   <td>Normal / healthy</td>
   <td class="n"><b>3</b> / 3</td>
   <td class="track">main</td>
-  <td class="journal">Nature 657<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/42557314/" target="_blank">42557314</a></span></td>
   <td class="note">preprint PMID 40667174</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE296139</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE296139" target="_blank">GEO · GSE296139</a></td>
+  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td>UNRESOLVED n/a</td>
   <td>pituitary</td>
   <td>snMultiome</td>
   <td>Normal / healthy</td>
   <td class="n"><b>6</b> / 6</td>
   <td class="track">main</td>
-  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td class="note">No publication yet. Parent GSE295840 may have more info</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE296329</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE296329" target="_blank">GEO · GSE296329</a></td>
+  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td>UNRESOLVED n/a</td>
   <td>pituitary</td>
   <td>snMultiome</td>
   <td>Normal / healthy</td>
   <td class="n"><b>6</b> / 6</td>
   <td class="track">main</td>
-  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td class="note">No publication. Parent GSE295840</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE296943</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE296943" target="_blank">GEO · GSE296943</a></td>
+  <td class="journal">Glia 74<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/42357873/" target="_blank">42357873</a></span></td>
   <td>Bukrinsky 2026</td>
   <td>brain (region unspecified in SOFT)</td>
   <td>snMultiome</td>
   <td>HIV / HAND (vs control)</td>
   <td class="n"><b>2</b> / 4</td>
   <td class="track">main</td>
-  <td class="journal">Glia 74<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/42357873/" target="_blank">42357873</a></span></td>
   <td class="note">DISEASE-CONTAINING: HIV+ (HAND / non-HAND) + uninfected controls — filter to uninfected controls only (Control1 + Control2 samples only)</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE300782</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE300782" target="_blank">GEO · GSE300782</a></td>
+  <td class="journal">Neuron 114<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41687613/" target="_blank">41687613</a></span></td>
   <td>Kandror 2026</td>
   <td>spinal cord (T4 thoracic + L4 lumbar)</td>
   <td>snATAC</td>
   <td>Healthy adult spinal cord</td>
   <td class="n"><b>20</b> / 20</td>
   <td class="track">spinal_cord</td>
-  <td class="journal">Neuron 114<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41687613/" target="_blank">41687613</a></span></td>
   <td class="note">UW-Madison (Rizvi lab senior). 20 ATAC libraries from 5 donors (Donor 2-6). Donor 2: 4× L; Donor 3: 4× T; Donors 4-6: 2× L + 2× T. 28 GB fragment file. Adult healthy spinal co…</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE305146</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE305146" target="_blank">GEO · GSE305146</a></td>
+  <td class="journal">Nat Med 32<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41545595/" target="_blank">41545595</a></span></td>
   <td>De 2026</td>
   <td>fetal cortex (PCW 10-20)</td>
   <td>snMultiome</td>
   <td>Down syndrome (DS vs disomic)</td>
   <td class="n"><b>20</b> / 45</td>
   <td class="track">main</td>
-  <td class="journal">Nat Med 32<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41545595/" target="_blank">41545595</a></span></td>
   <td class="note">DISEASE-CONTAINING: 23 disomic + 23 trisomy21 ATAC libraries (~17 unique donors each after collapsing multi-library samples); filter to disomic + in_final_analysis=TRUE (20 li…</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE322785</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE322785" target="_blank">GEO · GSE322785</a></td>
+  <td class="journal">Cell 189<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41819103/" target="_blank">41819103</a></span></td>
   <td>Sestan 2026</td>
   <td>cerebellar cortex</td>
   <td>snMultiome</td>
   <td>Comparative primate (human only)</td>
   <td class="n"><b>3</b> / 14</td>
   <td class="track">main</td>
-  <td class="journal">Cell 189<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41819103/" target="_blank">41819103</a></span></td>
   <td class="note">HUMAN samples only (n=3: H187, H390, H628) — exclude 11 non-human (4 marmoset C, 3 chimp P, 4 macaque R)</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE325789</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE325789" target="_blank">GEO · GSE325789</a></td>
+  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td>Chittiboina preprint</td>
   <td>pituitary adenomas + normal adjacent (surgical)</td>
   <td>snMultiome</td>
   <td>Pituitary adenoma margin</td>
   <td class="n"><b>2</b> / 6</td>
   <td class="track">main</td>
-  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td class="note">normal adjacent pituitary only (filter out Cushing&#x27;s adenoma samples)</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE330130</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE330130" target="_blank">GEO · GSE330130</a></td>
+  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td>Phatnani preprint</td>
   <td>lumbar spinal cord + motor cortex</td>
   <td>snMultiome</td>
   <td>ALS (vs control)</td>
   <td class="n"><b>9</b> / 20</td>
   <td class="track">spinal_cord_lumbar</td>
-  <td class="journal">unpublished<br><span class="pmid">PMID —</span></td>
   <td class="note">DISEASE-CONTAINING: ALS + sudden-death controls — filter to motor cortex controls only (spinal cord samples defer to sidecar)</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE331288</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE331288" target="_blank">GEO · GSE331288</a></td>
+  <td class="journal">Nat Commun 17<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/43015270/" target="_blank">43015270</a></span></td>
   <td>Cheng 2026</td>
   <td>cerebellum + frontal cortex</td>
   <td>snMultiome</td>
   <td>Alzheimer&#x27;s (AD vs control)</td>
   <td class="n"><b>7</b> / 29</td>
   <td class="track">main, organoid_crispri</td>
-  <td class="journal">Nat Commun 17<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/43015270/" target="_blank">43015270</a></span></td>
   <td class="note">G11 + G13 cerebellum controls ONLY (GSM9745978 + GSM9745980); 6 other controls borderline (ADNC pathology or DLB); 9 AD/ADRD + 6 AD frontal cortex excluded</td>
 </tr>
 <tr class="">
   <td class="cohort">GSE336954</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE336954" target="_blank">GEO · GSE336954</a></td>
+  <td class="journal">Nat Commun 17<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41554730/" target="_blank">41554730</a></span></td>
   <td>Girgenti 2026</td>
   <td>central amygdala</td>
   <td>snMultiome</td>
   <td>AUD (vs control)</td>
   <td class="n"><b>1</b> / 2</td>
   <td class="track">main</td>
-  <td class="journal">Nat Commun 17<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41554730/" target="_blank">41554730</a></span></td>
   <td class="note">AUD cases excluded from main per policy</td>
 </tr>
 <tr class="">
   <td class="cohort">Hwang-Girgenti:zen15186498</td>
   <td class="access"><a href="https://zenodo.org/records/15186498" target="_blank">Zenodo · 15186498</a></td>
+  <td class="journal">Nature 643<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/40533550/" target="_blank">40533550</a></span></td>
   <td>Hwang 2025</td>
   <td>dorsolateral prefrontal cortex</td>
   <td>snMultiome (zipped per-sample)</td>
   <td>PTSD (vs control)</td>
   <td class="n"><b>34</b> / 94</td>
   <td class="track">main</td>
-  <td class="journal">Nature 643<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/40533550/" target="_blank">40533550</a></span></td>
   <td class="note">DISEASE-CONTAINING: PTSD + controls — filter to controls only</td>
 </tr>
 <tr class="">
   <td class="cohort">sea-ad</td>
   <td class="access"><a href="https://registry.opendata.aws/allen-sea-ad-atlas/" target="_blank">AWS Open Data · allen-sea-ad</a><br><a href="https://portal.brain-map.org/explore/seattle-alzheimers-disease" target="_blank">Brain Map portal</a></td>
+  <td class="journal">Nat Neurosci 27<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39402379/" target="_blank">39402379</a></span></td>
   <td>Gabitto 2024</td>
   <td>middle temporal gyrus (MTG)</td>
   <td>snATAC</td>
   <td>Normal / healthy</td>
   <td class="n"><b>4</b> / 6 <span class="pend">(2 pend)</span></td>
   <td class="track">main</td>
-  <td class="journal">Nat Neurosci 27<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39402379/" target="_blank">39402379</a></span></td>
   <td class="note">48,632 control cells after filter</td>
 </tr>
 <tr class="">
   <td class="cohort">Zenodo:aerts-pd-cc</td>
   <td class="access"><a href="https://zenodo.org/records/19052536" target="_blank">Zenodo · 19052536</a></td>
+  <td class="journal">bioRxiv preprint<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41889906/" target="_blank">41889906</a></span></td>
   <td>Sigalova 2026</td>
   <td>cingulate cortex (NOT cerebellum)</td>
   <td>snATAC (NPZ)</td>
   <td>Parkinson&#x27;s disease (PD vs CN controls)</td>
   <td class="n"><b>111</b> / 190</td>
   <td class="track">main</td>
-  <td class="journal">bioRxiv preprint<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41889906/" target="_blank">41889906</a></span></td>
   <td class="note">PD donors excluded from main track; CN donors retained as pd_control</td>
 </tr>
 <tr class="">
   <td class="cohort">Zenodo:aerts-pd-sn</td>
   <td class="access"><a href="https://zenodo.org/records/19052536" target="_blank">Zenodo · 19052536</a></td>
+  <td class="journal">bioRxiv preprint<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41889906/" target="_blank">41889906</a></span></td>
   <td>Sigalova 2026</td>
   <td>substantia nigra</td>
   <td>snATAC (NPZ)</td>
   <td>Parkinson&#x27;s disease (PD vs CN controls)</td>
   <td class="n"><b>86</b> / 139</td>
   <td class="track">main</td>
-  <td class="journal">bioRxiv preprint<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/41889906/" target="_blank">41889906</a></span></td>
   <td class="note">PD donors excluded from main track; CN donors retained as pd_control</td>
 </tr>
 </tbody>
@@ -455,13 +436,13 @@
 <tr>
   <th>Cohort</th>
   <th>Data accession</th>
+  <th>Journal · PMID</th>
   <th>Author · year</th>
   <th>Tissue</th>
   <th>Modality</th>
   <th>Disease context</th>
   <th>YES / total</th>
   <th>Track</th>
-  <th>Journal · PMID</th>
   <th>Reason held out</th>
 </tr>
 </thead>
@@ -469,49 +450,49 @@
 <tr class="held">
   <td class="cohort">cxg-1-wang-kriegstein</td>
   <td class="access"><a href="https://cellxgene.cziscience.com/collections/ad2149fc-19c5-41de-8cfe-44710fbada73" target="_blank">CELLxGENE · ad2149fc</a><br><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE162170" target="_blank">GEO · GSE162170 (peak swap)</a></td>
+  <td class="journal">Nature<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39779846/" target="_blank">39779846</a></span></td>
   <td>Kriegstein 2024</td>
   <td>fetal cerebral cortex</td>
   <td>10x multiome</td>
   <td>Normal fetal brain (developmental)</td>
   <td class="n"><b>0</b> / 27</td>
   <td class="track">main</td>
-  <td class="journal">Nature<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/39779846/" target="_blank">39779846</a></span></td>
   <td class="note">RNA-level CXG h5ad (ENSG var_names, not peaks). PEAK-LEVEL SWAP AVAILABLE: GEO GSE162170 (Trevino 2021 Cell PMID 34390642) has snATAC_consensus_peaks.bed + atac_counts.tsv + m…</td>
 </tr>
 <tr class="held">
   <td class="cohort">cxg-2-veiga-adolescent</td>
   <td class="access"><a href="https://cellxgene.cziscience.com/collections/4624894f-6cf7-45d2-91ff-51fff9da9f13" target="_blank">CELLxGENE · 4624894f</a></td>
+  <td class="journal">bioRxiv<br><span class="pmid">PMID —</span></td>
   <td>Veiga 2026</td>
   <td>adolescent brain (surgical epilepsy)</td>
   <td>snMultiome</td>
   <td>Normal adolescent cortex (surgical)</td>
   <td class="n"><b>0</b> / 6</td>
   <td class="track">main</td>
-  <td class="journal">bioRxiv<br><span class="pmid">PMID —</span></td>
   <td class="note">RNA-level CXG h5ad. HCA project 984ce0a2 has fastq-only (96 files), no peak matrices, no GEO deposit. Recovery requires cellranger-atac count on 6-donor fastqs — heavy compute…</td>
 </tr>
 <tr class="held">
   <td class="cohort">cxg-3-braun-linnarsson</td>
   <td class="access"><a href="https://cellxgene.cziscience.com/collections/a66d41a7-f1de-4b70-b983-7a4b790a0d5d" target="_blank">CELLxGENE · a66d41a7</a></td>
+  <td class="journal">Nature<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/38693260/" target="_blank">38693260</a></span></td>
   <td>Linnarsson 2024</td>
   <td>first-trimester fetal brain (PCW 9-14)</td>
   <td>10x multiome</td>
   <td>Normal fetal brain (developmental)</td>
   <td class="n"><b>0</b> / 8</td>
   <td class="track">main</td>
-  <td class="journal">Nature<br><span class="pmid">PMID <a href="https://pubmed.ncbi.nlm.nih.gov/38693260/" target="_blank">38693260</a></span></td>
   <td class="note">Gene-level multiome h5ad (not peak-level). Braun 2023 Science (PMID 37824650) is RNA+spatial only — no ATAC. Sister ATAC paper Mannens 2024 Nature (10.1038/s41586-024-07234-1)…</td>
 </tr>
 <tr class="held">
   <td class="cohort">GSE274986</td>
   <td class="access"><a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE274986" target="_blank">GEO · GSE274986</a></td>
+  <td class="journal"><br><span class="pmid">PMID —</span></td>
   <td>n/a n/a</td>
   <td>glioblastoma tumor</td>
   <td>snRNA (regional)</td>
   <td>Tumor (EXCLUDED)</td>
   <td class="n"><b>0</b> / 1</td>
   <td class="track">excluded_cohort</td>
-  <td class="journal"><br><span class="pmid">PMID —</span></td>
   <td class="note">EXCLUDE — tumor, out of scope</td>
 </tr>
 </tbody>
